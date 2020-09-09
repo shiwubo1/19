@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, target-densitydpi=device-dpi">
+    <!-- <meta http-equiv="Refresh" content="1" /> -->
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            user-select: none;
+        }
+    </style>
+</head>
+
+<body>
+
+    <script>
+        josnp("./js/jsonp.txt", "fun", function (res) {
+            console.log(res);
+        })
+        function josnp(URL, fnName, fn) {
+            window[fnName] = fn;
+            //创造节点
+            var scriptObj = document.createElement("script");
+            scriptObj.src = URL;
+            document.body.appendChild(scriptObj);
+            document.body.removeChild(scriptObj)
+
+        }
+    </script>
+</body>
+
+</html>

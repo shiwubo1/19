@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, target-densitydpi=device-dpi">
+    <!-- <meta http-equiv="Refresh" content="1" /> -->
+    <link rel="stylesheet" href="../../css/index.css">
+    <link rel="stylesheet" href="../../css/bootstrap.css">
+    <link rel="stylesheet" href="../css/list.css">
+    <script src="../../js/jquery.js"></script>
+    <title>列表页</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            user-select: none;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div class="denglu">
+            <div class="container">
+                <p>欢迎来到拼夕夕</p>
+                <div class="dengdeng">
+                    <a href="./denglu.html">登录</a>
+                    <span>|</span>
+                    <a href="./zhuce.html">注册</a>
+                </div>
+            </div>
+        </div>
+        <div class="container  head">
+            <div class="logo"><img src="//cdn.pinduoduo.com/home/static/img/common/pdd_logo_v2.png" alt=""></div>
+            <div class="nav">
+                <a href="">首页</a>
+                <span>|</span>
+                <a href="https://ims.pinduoduo.com/">商家入驻</a>
+                <span>|</span>
+                <a href="https://www.pinduoduo.com/home/news/">热点资讯</a>
+                <span>|</span>
+                <a href="https://www.pinduoduo.com/recruit.html">社会招聘</a>
+                <span>|</span>
+                <a href="https://careers.pinduoduo.com/campus/">校园招聘</a>
+                <span>|</span>
+                <a href="https://supplier.pinduoduo.com/">招采平台</a>
+                <span>|</span>
+                <a href="https://www.pinduoduo.com/home/help/">帮助中心</a>
+                <span>|</span>
+                <a href="https://jubao.pinduoduo.com/home">举报中心</a>
+                <span>|</span>
+                <a href="https://jinbao.pinduoduo.com/">分享赚钱</a>
+            </div>
+        </div>
+    </header>
+
+    <form action="">
+        <input type="text" name="" id="inp">
+        <input type="button" name="" id="btn" value="搜索">
+    </form>
+    <div class="container">
+        <ul class="row">
+
+        </ul>
+    </div>
+
+    <div class="page">
+        <ul>
+            <li class="active"></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+        </ul>
+    </div>
+
+    <footer>
+        <!-- 黑框 -->
+        <div class="certificate">
+            <p>Copyright 2015-2020 pinduoduo.com 版权所有 (增值电信业务经营许可证：沪B2-20170215)</p>
+            <p class="p">互联网药品信息服务资格证书：（沪）-经营性-2019-0052</p>
+            <p> 沪公网安备
+                31010502000392号&nbsp;&nbsp;&nbsp;（沪）网械平台备字[2018]第00003号&nbsp;&nbsp;&nbsp;&nbsp;沪ICP备15010535号-13&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;营业执照
+            </p>
+        </div>
+        <!-- 小图 -->
+        <div class="pic">
+
+            <a href="http://www.shjbzx.cn">
+                <img src="//cdn.pinduoduo.com/home/static/img/common/wgxxjb_v2.png" />
+            </a>
+            <a href="http://www.12377.cn">
+                <img src="//cdn.pinduoduo.com/home/static/img/common/yhxxjb.jpg" />
+            </a>
+            <a href="/home/weiquan/">
+                <img src="//cdn.pinduoduo.com/home/static/img/common/pdd_weiquan_entry.png" />
+            </a>
+            <a href="/home/food_trade/">
+                <img src="//cdn.pinduoduo.com/home/static/img/common/pdd_food_trade_entry.jpg" />
+            </a>
+            <a href="/home/wangjing/">
+                <img src="//cdn.pinduoduo.com/home/static/img/common/pdd_wangjing_tip.jpg" />
+            </a>
+            <a href="https://scjgj.sh.gov.cn/platform/survey/step1_phone">
+                <img src="//cdn.pinduoduo.com/home/static/img/common/pdd_foot_shop_comment.png" />
+            </a>
+            <a href="https://newsxmwb.xinmin.cn/special/mljbzsjs/index.html">
+                <img src="//cdn.pinduoduo.com/home/static/img/common/pdd_foot_competition.png" />
+            </a>
+        </div>
+
+    </footer>
+
+
+
+    <script>
+        /*获取地址栏？后的东西*/
+        var sea = location.search;
+        sea = decodeURI(sea.split("=")[1])
+        if (sea == "undefined") {
+            location.href = "./03首页.html"
+        } else {
+            /*判断有没有登陆*/
+            var a = localStorage.getItem("token");
+            var b = localStorage.getItem("username");
+            if (a != "null" && b != "null") {
+                $.ajax({
+                    url: "http://192.168.1.107:3000/users/userinfo",
+                    data: {
+                        username: b,
+                        token: a
+                    },
+                    type: "get",
+                    dataType: "json",
+                    success: function (res) {
+                        if (res.state === 0) {
+                            console.log(res.userinfo.username);
+                            $(".dengdeng").html(`<a href="javascript:;">欢迎回来${res.userinfo.username}</a><span>|</span><a href="javascript:;" class="tuichu">退出登录</a>`)
+                            $(".tuichu").click(function () {
+                                localStorage.setItem("token", null);
+                                localStorage.setItem("username", null);
+                                location.reload()
+                            })
+                        }
+                    }
+                })
+            }
+            fn(sea);
+        }
+        $("#btn").click(function () {
+            sea = $("#inp").val()
+            if (sea !== "") {
+                fn(sea)
+            } else {
+                return
+            }
+        })
+
+        var pagename = 1;
+        var maxpage = 9;
+        clickPaging()
+
+        /*分页*/
+        function clickPaging() {
+            if (pagename >= 1 && pagename <= 3) {
+                $(".page>ul>li").eq(0).html(1).next().html(2).next().html(3).next().html(4).next().html("……").next().html(maxpage - 1).next().html(maxpage);
+                $(".page>ul>li").eq(pagename - 1).addClass("active").siblings().removeClass("active");
+            } else if (pagename <= maxpage && pagename >= maxpage - 2) {
+                $(".page>ul>li").eq(0).html(1).next().html(2).next().html("……").next().html(maxpage - 3).next().html(maxpage - 2).next().html(maxpage - 1).next().html(maxpage);
+                $(".page>ul>li").eq(pagename - maxpage - 1).addClass("active").siblings().removeClass("active");
+
+            } else {
+                $(".page>ul>li").eq(0).html(1).next().html("……").next().html(pagename - 1).next().html(pagename).next().html(pagename + 1).next().html("……").next().html(maxpage);
+                $(".page>ul>li").eq(3).addClass("active").siblings().removeClass("active");
+
+            }
+        }
+        /*事件监听*/
+        bindEvent()
+        function bindEvent() {
+            $(".page>ul>li").click(function () {
+                if ($(this).html() === "……") {
+                    return;
+                } else {
+                    pagename = parseInt($(this).html());
+                    fn(sea, pagename);
+                    clickPaging()
+                }
+            })
+        }
+
+        /*请求数据*/
+        function fn(sea, page = 1) {
+            $.ajax({
+                url: "http://127.0.0.1/w/website/findGoodsList",
+                type: "get",
+                dataType: "json",
+                data: {
+                    info: sea,
+                    pageNo: page
+                },
+                success: function (res) {
+                    res = res.data.tbk_dg_material_optional_response.result_list.map_data;
+                    console.log(res);
+                    var str = "";
+                    for (var i = 0; i < res.length; i++) {
+                        str += `<li class="col-lg-3 col-md-4 col-sm-6 col-xs-12 lilist"><a href="./详情页.html?aa=${res[i].item_id}"><img src="${res[i].pict_url}" alt=""><h3>${res[i].category_name}</h3></a></li>`
+                    }
+                    $("ul.row").html(str)
+                }
+            })
+
+        }
+
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, target-densitydpi=device-dpi">
+    <!-- <meta http-equiv="Refresh" content="1" /> -->
+    <title>Document</title>
+    <script src="../js/jquery.js"></script>
+    <link rel="stylesheet" href="../css/bootstrap.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            user-select: none;
+        }
+
+        #div {
+            /* width: 1600px; */
+            margin: auto;
+        }
+
+        .d {
+            box-sizing: border-box;
+            margin: auto;
+        }
+
+        .d>img {
+            width: 100%;
+        }
+
+        .d>p {
+            width: 100%;
+            text-align: center;
+            line-height: 40px;
+            font-size: 20px;
+        }
+        .container{
+            width: 90%;
+        }
+    </style>
+</head>
+<div class="container">
+    <div id="div" class="row">
+
+    </div>
+</div>
+
+<body>
+
+
+    <script type="text/template" id="scp">
+        <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12  d">
+            <img src = "%pic%" title="%title%" alt = "alt"><p>  %name% </p>
+        </div>
+    </script>
+    <script>
+
+
+        // /* demo 1 字符串 模板  */
+        // var str = "今天天气%zhenhao%,我的心情%henhao%";
+        // var dict = {
+        //     "zhenhao":"真好",
+        //     "henhao":"很好"
+        // }
+        // str = str.replace(/\%([a-z]+)\%/g,function(match,$1,index,string){
+        //     return dict[$1]
+        // })
+        // console.log(str);
+
+
+        // /*demo 2     jquery数组遍历方法each   (枚举  遍历  迭代器)*/
+        // var arr = [1,3,4,321,354,65,4]
+        // // $.each(arr,function(a,b){
+        // //     console.log("a",a);
+        // //     console.log("b",b);
+        // // })
+
+        // /*自己写一个each方法*/
+        // function each(arr,fn){
+        //     for(var i=0;i<arr.length;i++){
+        //         fn(arr[i])
+        //     }
+        // }
+        // each(arr,function(a){
+        //     console.log(a);
+        // })
+
+        /*demo3*/
+        var scp = $("#scp").html();
+        $.ajax({
+            url: "./yule.json",
+            dataType: "json",
+            success: function (res) {
+                res = res.result.data;
+                var str = "";
+                for (var i = 0; i < res.length; i++) {
+                    str += scp
+                    var dict = {
+                        "pic": res[i].thumbnail_pic_s,
+                        "name": res[i].author_name,
+                        "title":res[i].title,
+                        "alt":res[i].author_name
+                    }
+                    str = str.replace(/\%([a-z]+)\%/g, function (match, $1, index, string) {
+                        return dict[$1]
+                    })
+                    
+                }
+                $("#div").html(str)
+            }
+        })
+
+
+
+    </script>
+</body>
+
+</html>

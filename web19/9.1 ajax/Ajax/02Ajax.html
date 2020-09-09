@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, target-densitydpi=device-dpi">
+    <!-- <meta http-equiv="Refresh" content="1" /> -->
+    <title>Document</title>
+    <link rel="stylesheet" href="../css/bootstrap.css">
+    <script src="./axax.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            user-select: none;
+        }
+
+        #div {
+            /* width: 1600px; */
+            margin: auto;
+        }
+
+        .d {
+            box-sizing: border-box;
+            margin: auto;
+        }
+
+        .d>img {
+            width: 100%;
+        }
+
+        .d>p {
+            width: 100%;
+            text-align: center;
+            line-height: 40px;
+            font-size: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div id="div" class="row">
+           
+        </div>
+    </div>
+
+
+    <script>
+        $.ajax({
+            type: "get",
+            url: "./yule.json",
+            datatype: "json",
+            success: function (response) {
+                var di = document.getElementById("div");
+                var a = response.result.data;
+                for (var i = 0; i < a.length; i++) {
+                    // console.log(a[i].title);
+                    var div = document.createElement("div");
+                    div.className="col-lg-3 col-md-4 col-sm-6 col-xs-12  d";
+                    div.innerHTML="<img src = " + a[i].thumbnail_pic_s  + "><p>" + a[i].author_name + "</p>";
+                    di.appendChild(div)
+                }
+            }
+        })
+
+
+
+    </script>
+</body>
+
+</html>

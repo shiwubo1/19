@@ -1,0 +1,207 @@
+.lilist {
+    list-style: none;
+    margin-top: 30px;
+
+    a {
+        display        : block;
+        width          : 100%;
+        color          : black;
+        text-align     : center;
+        text-decoration: none;
+
+        img {
+            border: 1px solid #000000;
+            width : 100%;
+
+            +h3 {
+                margin       : 0;
+                line-height  : 20px;
+                line-height  : 50px;
+                border       : 1px solid #000000;
+                text-overflow: ellipsis;
+                overflow     : hidden;
+                white-space  : nowrap;
+            }
+        }
+    }
+
+    a:hover {
+        color          : blue;
+        text-decoration: none;
+    }
+}
+
+
+
+
+
+form {
+    width : 500px;
+    margin: 141px auto 0;
+}
+
+.page {
+    width : 500px;
+    height: 50px;
+    margin: 30px auto;
+
+    ul {
+        width          : 500px;
+        height         : 500px;
+        display        : flex;
+        justify-content: space-around;
+
+        li {
+            border          : 1px solid #000000;
+            width           : 50px;
+            height          : 50px;
+            background-color: pink;
+            text-align      : center;
+            line-height     : 50px;
+            font-size       : 20px;
+        }
+
+        .active {
+            background-color: yellowgreen;
+        }
+    }
+}
+
+/*头部*/
+
+header {
+    width           : 100%;
+    position        : fixed;
+    background-color: #fff;
+    top             : 0;
+    height          : 141px;
+    z-index         : 99;
+
+    .denglu {
+        height          : 30px;
+        font-size       : 20px;
+        line-height     : 30px;
+        background-color: #fafafa;
+
+        div {
+            p {
+                float: left;
+            }
+
+            div {
+                float: right;
+
+                a {
+                    color: #6c6c6c;
+
+                }
+
+                a:hover {
+                    text-decoration: none;
+                }
+
+                span {
+                    padding: 0 15px;
+                }
+            }
+
+        }
+    }
+
+    .head {
+        height  : 105px;
+        position: relative;
+
+        .logo {
+            height: 105px;
+            width : 180px;
+
+            img {
+                margin-top: 20px;
+                width     : 100%;
+            }
+        }
+
+        .nav {
+            width      : 860px;
+            line-height: 30px;
+            position   : absolute;
+            top        : 55%;
+            left       : 230px;
+            margin-top : -15px;
+
+            a {
+                line-height: 20px;
+                float      : left;
+                cursor     : pointer;
+                font-size  : 18px;
+                color      : #6c6c6c;
+            }
+
+            a:hover {
+                text-decoration: none;
+            }
+
+            span {
+                color      : #6c6c6c;
+                line-height: 20px;
+                float      : left;
+                display    : block;
+                margin     : 0 12px;
+                font-size  : 20px;
+            }
+        }
+    }
+}
+
+
+/*底部*/
+footer {
+    background-color: #fff;
+
+    // padding-top: 60px;
+    height: 200px;
+
+    /*黑框区域*/
+    .certificate {
+        height          : 130px;
+        background-color: #3f3e3e;
+        padding-top     : 27px;
+        box-sizing      : border-box;
+
+        p {
+            font-size  : 14px;
+            line-height: 1;
+            text-align : center;
+            color      : #b1b1b1;
+        }
+
+        .p {
+            margin: 17px auto;
+        }
+    }
+
+    /*小图*/
+    .pic {
+        height         : 70px;
+        display        : flex;
+        justify-content: center;
+
+        a {
+            text-decoration: none;
+            color          : inherit;
+            text-align     : center;
+            font-size      : 16px;
+
+            img {
+                display       : inline-block;
+                width         : auto;
+                height        : auto;
+                max-height    : 50px;
+                line-height   : 50px;
+                vertical-align: middle;
+                margin        : 10px;
+            }
+        }
+    }
+}

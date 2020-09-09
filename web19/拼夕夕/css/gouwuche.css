@@ -1,0 +1,27 @@
+.container {
+  margin-top: 30px;
+  text-align: center;
+}
+
+#tbody > tr > td {
+  height: 80px;
+  line-height: 80px;
+  padding: 0;
+}
+#tbody > tr > td img {
+  height: 80%;
+}
+#tbody > tr > td span {
+  width: 20px;
+  height: 20px;
+  line-height: 20px;
+  font-size: 15px;
+  font-weight: 0;
+  text-align: center;
+  color: #666666;
+  border: 1px solid #666666;
+  border-radius: 50%;
+  margin: 0 10px;
+}
+
+/*# sourceMappingURL=gouwuche.css.map */

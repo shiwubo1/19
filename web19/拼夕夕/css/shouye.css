@@ -1,0 +1,348 @@
+@charset "UTF-8";
+/*头部*/
+body {
+  background-color: #fafafa;
+}
+
+.container {
+  padding-right: 0;
+  padding-left: 0;
+}
+
+header {
+  width: 100%;
+  position: fixed;
+  background-color: #fff;
+  top: 0;
+  height: 141px;
+  z-index: 99;
+}
+header .denglu {
+  height: 30px;
+  font-size: 20px;
+  line-height: 30px;
+  background-color: #fafafa;
+}
+header .denglu div p {
+  float: left;
+}
+header .denglu div div {
+  float: right;
+}
+header .denglu div div a {
+  color: #6c6c6c;
+}
+header .denglu div div a:hover {
+  text-decoration: none;
+}
+header .denglu div div span {
+  padding: 0 15px;
+}
+header .head {
+  height: 105px;
+  position: relative;
+}
+header .head .logo {
+  height: 105px;
+  width: 180px;
+}
+header .head .logo img {
+  margin-top: 20px;
+  width: 100%;
+}
+header .head .nav {
+  width: 860px;
+  line-height: 30px;
+  position: absolute;
+  top: 55%;
+  left: 230px;
+  margin-top: -15px;
+}
+header .head .nav a {
+  line-height: 20px;
+  float: left;
+  cursor: pointer;
+  font-size: 18px;
+  color: #6c6c6c;
+}
+header .head .nav a:hover {
+  text-decoration: none;
+}
+header .head .nav span {
+  color: #6c6c6c;
+  line-height: 20px;
+  float: left;
+  display: block;
+  margin: 0 12px;
+  font-size: 20px;
+}
+
+/* 轮播图 */
+#box {
+  background-color: #fff;
+  height: 515px;
+  margin: 141px auto 0;
+}
+
+.carousel-inner > .item > img {
+  width: 1220px;
+  height: 517px;
+}
+
+.carousel-indicators > li {
+  margin: 0 10px;
+  width: 20px;
+  border-color: black;
+  height: 20px;
+}
+
+.carousel-indicators > li.active {
+  margin: 0 10px;
+  width: 20px;
+  height: 20px;
+}
+
+/*底部*/
+footer {
+  background-color: #fff;
+  padding-top: 60px;
+  height: 639px;
+  /*联系我们*/
+  /*入驻多多国际*/
+  /*黑框区域*/
+  /*小图*/
+}
+footer .relation {
+  width: 1180px;
+  height: 240px;
+  margin: auto;
+  background-color: #fff;
+}
+footer .relation .relation_left {
+  float: left;
+  box-sizing: border-box;
+  height: 100%;
+  width: 667px;
+  padding-top: 19px;
+  border-right: 1px solid #000000;
+}
+footer .relation .relation_left li {
+  width: 162px;
+  margin-right: 60px;
+  float: left;
+}
+footer .relation .relation_left li img {
+  border-top: 1px solid transparent;
+  width: 162px;
+}
+footer .relation .relation_left li p {
+  padding: 0 10px;
+  width: 100%;
+  color: #4d4d4d;
+  font-size: 16px;
+  text-align: center;
+}
+footer .relation .relation_left + .relation_right {
+  margin-left: 50px;
+  width: 456px;
+  float: left;
+}
+footer .relation .relation_left + .relation_right h3 {
+  color: #4d4d4d;
+  font-size: 24px;
+  line-height: 24px;
+}
+footer .relation .relation_left + .relation_right h3 + p {
+  color: #4d4d4d;
+  font-size: 15px;
+  line-height: 16px;
+  margin-top: 20px;
+}
+footer .invite {
+  height: 21px;
+  margin: 60px auto;
+}
+footer .invite a {
+  display: block;
+  padding: 0 6px;
+  border-right: 1px solid #666666;
+  float: left;
+  color: #6c6c6c;
+  font-size: 16px;
+}
+footer .invite :hover {
+  text-decoration: none;
+}
+footer .invite :last-child {
+  border-right: none;
+}
+footer .certificate {
+  height: 130px;
+  background-color: #3f3e3e;
+  padding-top: 27px;
+  box-sizing: border-box;
+}
+footer .certificate p {
+  font-size: 14px;
+  line-height: 1;
+  text-align: center;
+  color: #b1b1b1;
+}
+footer .certificate .p {
+  margin: 17px auto;
+}
+footer .pic {
+  height: 40px;
+  display: flex;
+  justify-content: center;
+}
+footer .pic a {
+  text-decoration: none;
+  color: inherit;
+  text-align: center;
+  font-size: 16px;
+}
+footer .pic a img {
+  display: inline-block;
+  width: auto;
+  height: auto;
+  max-height: 50px;
+  line-height: 50px;
+  vertical-align: middle;
+  margin: 10px;
+}
+
+/*导航*/
+nav .container {
+  height: 44px;
+  background-color: #ed445b;
+}
+nav .container .classify {
+  cursor: pointer;
+  float: left;
+  font-size: 16px;
+  width: 150px;
+  text-align: center;
+  line-height: 44px;
+  color: white;
+  border-radius: 5px;
+  background-color: #f99;
+  position: relative;
+}
+nav .container .classify .clapos {
+  width: 400px;
+  height: 200px;
+  display: none;
+  background-color: #fff;
+  position: absolute;
+  border: 1px solid #666;
+  z-index: 99;
+}
+nav .container .classify .clapos ul {
+  width: 400px;
+  height: 200px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+}
+nav .container .classify .clapos ul li {
+  line-height: 48px;
+}
+nav .container .classify .clapos ul li a {
+  color: #6c6c6c;
+  font-size: 20px;
+  line-height: 40px;
+}
+nav .container .classify .clapos ul li :hover {
+  text-decoration: none;
+  color: orange;
+}
+nav .container .bao {
+  float: left;
+  display: flex;
+  justify-content: flex-start;
+  line-height: 44px;
+}
+nav .container .bao li {
+  cursor: pointer;
+  padding: 0 20px;
+  color: white;
+}
+nav .container .bao .active {
+  color: orange;
+}
+
+/*商品*/
+.shop {
+  margin-top: 20px;
+}
+.shop ul li {
+  background-color: #fff;
+  box-sizing: border-box;
+  margin-bottom: 20px;
+}
+.shop ul li img {
+  display: block;
+  width: 100%;
+  height: 270px;
+}
+.shop ul li a {
+  display: block;
+  color: #686868;
+  font-size: 16px;
+  line-height: 30px;
+  width: 100%;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+.shop ul li a:hover {
+  text-decoration: none;
+}
+.shop ul li div {
+  height: 54px;
+}
+.shop ul li div .group-price {
+  color: #111;
+  font-size: 22px;
+  line-height: 54px;
+}
+.shop ul li div .market-price {
+  font: initial;
+  color: #cbcbcb;
+  font-size: 18px;
+  text-decoration: line-through;
+  line-height: 54px;
+}
+.shop ul li div .count {
+  line-height: 54px;
+  float: right;
+  color: #9c9c9c;
+  font-size: 16px;
+}
+.shop + .page {
+  width: 500px;
+  height: 50px;
+  margin: 30px auto;
+}
+.shop + .page ul {
+  width: 500px;
+  height: 500px;
+  display: flex;
+  justify-content: space-around;
+}
+.shop + .page ul li {
+  border: 1px solid #000000;
+  width: 50px;
+  height: 50px;
+  background-color: pink;
+  text-align: center;
+  line-height: 50px;
+  font-size: 20px;
+}
+.shop + .page ul .active {
+  background-color: yellowgreen;
+}
+
+/*# sourceMappingURL=shouye.css.map */

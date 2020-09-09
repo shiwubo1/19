@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, target-densitydpi=device-dpi">
+    <!-- <meta http-equiv="Refresh" content="1" /> -->
+    <title>Document</title>
+    <script src="../js/jquery.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            user-select: none;
+        }
+        .div{
+            width: 500px;
+            margin: 100px auto;
+        }
+        input{
+            width: 500px;
+            height: 40px;
+            padding: 5px;
+            line-height: 40px;
+            font-size: 20px;
+        }
+        ul{
+            width: 500px;
+            display: none;
+            list-style: none;
+        }
+        a{
+            display: block;
+            width: 500px;
+            height: 40px;
+            padding: 5px;
+            line-height: 40px;
+            font-size: 20px;
+            text-decoration: none;
+            color: black;
+            background-color: #ff9999;
+        }
+        a:hover{
+            background-color: #fff;
+            color: pink;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="div">
+        <input type="text" name="" id="">
+        <ul>
+        </ul>
+    </div>
+    
+    <script>
+        function myNeed(data){
+            if(data.s.length>0){
+                ullist.css("display","block")
+                var str = "";
+                for(var i = 0;i<data.s.length;i++){
+                    str += '<li><a href="https://www.baidu.com/s?wd='+data.s[i]+'">'+ data.s[i] +'</a></li>'
+                }
+                ullist.html(str);
+            }else{
+                ullist.css("display","none")
+            }
+        }
+        
+        
+        var input = $("input");
+        var ullist = $("ul");
+        /*表单的键盘弹起事件,键盘弹起创建一个script标签调用百度模糊匹配的模板*/
+        input.keyup(function(){
+            if($(this).val()!=""){
+                var scp = $("<script src = 'https://sp0.baidu.com/5a1Fazu8AA54nxGko9WTAnF6hhy/su?wd="+$(this).val()+"&cb=myNeed'>");
+                    // console.log(scp);
+                $("body").append(scp)    
+                $("body").remove(scp)     
+            }else{
+                ullist.css("display","none")
+            }
+        })
+
+
+
+
+
+    </script>
+</body>
+
+</html>

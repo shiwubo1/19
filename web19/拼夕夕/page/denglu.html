@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="viewport"
+    content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, target-densitydpi=device-dpi">
+  <!-- <meta http-equiv="Refresh" content="1" /> -->
+  <link rel="stylesheet" href="../../css/index.css">
+  <link rel="stylesheet" href="../css/denglu.css">
+  <link rel="stylesheet" href="../../css/bootstrap.css">
+  <link rel="stylesheet" href="../css/verify.css">
+  <script src="../../js/jquery.js"></script>
+  <script src="../js/denglu.js"></script>
+  <script src="../js/verify.js"></script>
+  <title>Document</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      user-select: none;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- 背景 -->
+  <div class="stars"></div>
+
+
+  <!-- 表单 -->
+  <form class="form-horizontal box">
+    <div class="form-group">
+      <p>登录</p>
+    </div>
+
+    <div class="form-group">
+      <label for="inputEmail3" class="col-sm-3 control-label">&nbsp;用&nbsp;户&nbsp;名&nbsp;:</label>
+      <div class="col-sm-8">
+        <input type="text" class="form-control name" id="inputEmail3" placeholder="you are name">
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="inputPassword3" class="col-sm-3 control-label">&nbsp;&nbsp;密&nbsp;&nbsp;码&nbsp;&nbsp;:</label>
+      <div class="col-sm-8">
+        <input type="password" class="form-control password" id="inputPassword3" placeholder="Password">
+      </div>
+    </div>
+
+
+
+    <!-- 验证码 -->
+    <div id="mpanel4" style="margin-top:50px;">
+    </div>
+
+    <div class="form-group">
+      <div class="col-sm-offset-2 col-sm-10">
+        <div class="checkbox">
+          <label>
+            <input type="checkbox" class="xuanze">是否记住密码
+          </label>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <div class="col-sm-offset-2 col-sm-10">
+        <button type="button" class="btn btn-default button">登录</button>
+      </div>
+    </div>
+    <div class="form-group">
+      <a href="./zhuce.html" class="left">没有账号立即注册</a>
+      <a href="javascript:;" class="right">忘记密码</a>
+    </div>
+  </form>
+
+
+
+  <script>
+    /*开关*/
+    var result = false;
+    /*验证码*/
+    $('#mpanel4').slideVerify({
+      type: 2, //类型
+      vOffset: 5, //误差量，根据需求自行调整
+      vSpace: 5, //间隔
+      imgName: ['../../image/1.jpg', '../../image/2.jpg'],
+      imgSize: {
+        width: '350px',
+        height: '200px',
+      },
+      blockSize: {
+        width: '40px',
+        height: '40px',
+      },
+      barSize: {
+        width: '350px',
+        height: '40px',
+      },
+      ready: function () { },
+      success: function () {
+        result = true;
+      },
+      error: function () {
+        alert('验证失败！');
+        // result = false;
+      }
+    });
+
+    /*点击按钮*/
+    $(".button").click(function () {
+      /*用户名*/
+      var namereg = /^[a-zA-Z][a-zA-Z0-9_]{4,15}$/;
+
+      /*判断用户名不能为空 还有格式*/
+      if ($(".name").val() === "") {
+        alert("用户名不能为空")
+        return;
+      } else if (reg($(".name").val(), namereg) === false) {
+        alert("用户名格式错误,(字母开头，允许5-16字节，允许字母数字下划线)")
+        return;
+      };
+      /*判断密码不能为空 还有格式*/
+      /*密码*/
+      var passwordreg = /^[a-zA-Z]\w{5,17}$/;
+      if ($(".password").val() === "") {
+        alert("密码不能为空");
+        return;
+      } else if (reg($(".password").val(), passwordreg) === false) {
+        alert("密码格式错误,英文字母开头的6-18位")
+        return;
+      };
+      if(!result){
+        alert("请输入验证码")
+        return;
+      }
+
+      $.ajax({
+        url: "http://192.168.1.107:3000/users/login",
+        type: "post",
+        dataType: "json",
+        data: {
+          username: $(".name").val(),
+          password: $(".password").val(),
+        },
+        success: function (res) {
+          console.log(res);
+          if (res.state === 2) {
+            alert("密码错误,请重新输入");
+          } else if (res.state === 1) {
+            alert("用户名不存在")
+          } else if (res.state === 0) {
+            if ($(".xuanze").get(0).checked) {
+              document.cookie = "token = " + res.token, +"username = " + $(".name").val() + ",3600000";
+            }
+            localStorage.setItem("token", res.token);
+            localStorage.setItem("username", $(".name").val());
+            alert("登陆成功,即将跳转");
+            location.href="../index.html"
+          }
+        }
+      })
+    })
+
+
+    function reg(str, reg) {
+      return reg.test(str)
+    }
+
+
+  </script>
+</body>
+
+</html>

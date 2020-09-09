@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="viewport"
+    content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, target-densitydpi=device-dpi">
+  <!-- <meta http-equiv="Refresh" content="1" /> -->
+  <link rel="stylesheet" href="../css/zhuce.css">
+  <link rel="stylesheet" href="../../css/bootstrap.css">
+  <script src="../../js/jquery.js"></script>
+
+  <title>Document</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      user-select: none;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- 背景 -->
+  <div class="stars"></div>
+
+  <!-- 表单 -->
+
+  <form class="form-horizontal box">
+    <div class="form-group">
+      <div class="col-sm-offset-2 col-sm-10">
+        <p>注册</p>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="inputEmail3" class="col-sm-3 control-label">&nbsp;&nbsp;邮&nbsp;&nbsp;箱&nbsp;&nbsp;:</label>
+      <div class="col-sm-8">
+        <input type="email" class="form-control email" id="inputEmail3" placeholder="Email">
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="inputEmail3" class="col-sm-3 control-label">&nbsp;用&nbsp;户&nbsp;名&nbsp;:</label>
+      <div class="col-sm-8">
+        <input type="text" class="form-control name" id="inputEmail3" placeholder="you are name">
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="inputTel3" class="col-sm-3 control-label">&nbsp;手&nbsp;机&nbsp;号&nbsp;:</label>
+      <div class="col-sm-8">
+        <input type="tel" class="form-control tel" id="inputTel3" placeholder="tel">
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="inputPassword3" class="col-sm-3 control-label">&nbsp;&nbsp;密&nbsp;&nbsp;码&nbsp;&nbsp;:</label>
+      <div class="col-sm-8">
+        <input type="password" class="form-control password" id="inputPassword3" placeholder="Password">
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="inputPassword3" class="col-sm-3 control-label">确认密码:</label>
+      <div class="col-sm-8">
+        <input type="password" class="form-control repassword" id="inputPassword3" placeholder="Password">
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="col-sm-offset-2 col-sm-10">
+        <div class="checkbox">
+          <label>
+            <input type="checkbox" class="xuanze"> 我同意并遵守协议<a href="">《拼夕夕注册协议》</a>
+          </label>
+        </div>
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="col-sm-offset-2 col-sm-10">
+        <button type="button" class="btn btn-default button">注册</button>
+        <a href="./denglu.html" class="deng">已有帐号,立即登录</a>
+      </div>
+    </div>
+  </form>
+
+  <script>
+
+
+
+    /*点击按钮*/
+    $(".button").click(function () {
+      /*email*/
+      var emailreg = /^\w+([-+.]\w+)*@\w+([-.]\w+)*.\w+([-.]\w+)*$/;
+      // /*判断邮箱不能为空,还有格式*/
+      if ($(".email").val() === "") {
+        alert("邮箱不能为空");
+        return;
+      } else if (reg($(".email").val(), emailreg) === false) {
+        alert("邮箱格式错误,格式*********@(163/qq).com")
+        return;
+      };
+      /*用户名*/
+      var namereg = /^[\d][a-zA-Z0-9_]{4,15}$/;
+
+      /*判断用户名不能为空 还有格式*/
+      if ($(".name").val() === "") {
+        alert("用户名不能为空")
+        return;
+      } else if (reg($(".name").val(), namereg) === false) {
+        alert("用户名格式错误,(字母开头，允许5-16字节，允许字母数字下划线)")
+        return;
+      };
+      /*判断手机号不能为空 还有格式*/
+      /*手机号*/
+      var telreg = /^(13[0-9]|14[5|7]|15[0|1|2|3|5|6|7|8|9]|18[0|1|2|3|5|6|7|8|9])\d{8}$/;
+      if ($(".tel").val() === "") {
+        alert("手机号不能为空");
+        return;
+      } else if (reg($(".tel").val(), telreg) === false) {
+        alert("手机号格式错误,格式*********@(163/qq).com")
+        return;
+      };
+      /*判断密码不能为空 还有格式*/
+      /*密码*/
+      var passwordreg = /^[a-zA-Z]\w{5,17}$/;
+      if ($(".password").val() === "") {
+        alert("密码不能为空");
+        return;
+      } else if (reg($(".password").val(), passwordreg) === false) {
+        alert("密码格式错误,英文字母开头的6-18位")
+        return;
+      };
+      /*确认密码*/
+      if ($(".repassword").val() !== $(".password").val()) {
+        alert("两次密码输入不一致");
+        return;
+      }
+      /*选择框*/
+      if (!$(".xuanze").get(0).checked) {
+        alert("请阅读协议并勾选");
+        return
+      }
+      /*请求数据*/
+      $.ajax({
+        url: "http://192.168.1.107:3000/users/register",
+        type: "post",
+        dataType: "json",
+        data: {
+          email: $(".email").val(),
+          username: $(".name").val(),
+          password: $(".password").val(),
+          phone: $(".tel").val(),
+        },
+        success: function (res) {
+          console.log(res);
+          if (res.state === 0) {
+            alert("注册成功,跳转登录页");
+            location.href = "./denglu.html";
+          } else if (res.state === 1) {
+            alert("用户名已存在");
+          }
+        }
+      })
+    })
+
+
+
+
+    function reg(str, reg) {
+      return reg.test(str)
+    }
+
+
+
+
+
+    /*背景*/
+    $(document).ready(function () {
+      var stars = 2000;  /*星星的密集程度，数字越大越多*/
+      var $stars = $(".stars");
+      var r = 500;   /*星星的看起来的距离,值越大越远,可自行调制到自己满意的样子*/
+      for (var i = 0; i < stars; i++) {
+        var $star = $("<div/>").addClass("star");
+        $stars.append($star);
+      }
+      $(".star").each(function () {
+        var cur = $(this);
+        var s = 0.2 + (Math.random() * 1);
+        var curR = r + (Math.random() * 300);
+        cur.css({
+          transformOrigin: "0 0 " + curR + "px",
+          transform: " translate3d(0,0,-" + curR + "px) rotateY(" + (Math.random() * 360) + "deg) rotateX(" + (Math.random() * -50) + "deg) scale(" + s + "," + s + ")"
+        })
+      })
+    })
+
+  </script>
+</body>
+
+</html>

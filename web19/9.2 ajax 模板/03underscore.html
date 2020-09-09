@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, target-densitydpi=device-dpi">
+    <!-- <meta http-equiv="Refresh" content="1" /> -->
+    <title>Document</title>
+    <script src="../js/underscore.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            user-select: none;
+        }
+    </style>
+</head>
+
+<body>
+
+    <script>
+        // /*underscore.js  格式_.  */
+
+        // /*1、模板引擎 _.template()    内置模板<%=   %>*/
+        // /*模板字符串*/
+        // var str = "今天星期<%=xingqi%>,好<%=ganjue%>啊,我今天要<%=ganma%>"
+        // /*通过模板字符串生成一个数据绑定函数*/
+        // var compile = _.template(str);
+        // /*字典*/
+        // var dictionary = {
+        //     "xingqi": "三",
+        //     "ganjue": "热",
+        //     "ganma": "宅在家里吹空调"
+        // }
+        // /*调用数据绑定函数完成数据绑定只需要调用一个参数就行,那就是字典*/
+        // console.log(compile(dictionary));        
+        // /*2、 shuffle   返回一个随机乱序的list副本*/
+        //     var arr = [5,231,65,43,156,4,1621,469,65,1,145]
+        //     var arr1 = _.shuffle(arr)
+        //     console.log(arr1);
+        // /*3、sample 从list中产生一个随机样本,第二个参数是几表示要几个*/
+        //     var arr = [566,132,16,3541,654,11,6,54,61,61,5];
+        //     var arr1 = _.sample(arr,6);
+        //     console.log(arr1);
+        // /*4、each  迭代器*/
+        //     var arr = [321,35,85,1,35,41];
+        //     var arr1 = _.each(arr,function(item){
+        //         console.log(item);
+        //     })
+        // /*5、filter 筛选器   筛选所有符合条件的*/
+        // var arr = [
+        //     { "xingming": "喜羊羊", "age": 12, "sex": "男" },
+        //     { "xingming": "懒羊羊", "age": 18, "sex": "女" },
+        //     { "xingming": "美羊羊", "age": 2, "sex": "女" },
+        //     { "xingming": "沸羊羊", "age": 2, "sex": "男" },
+        //     { "xingming": "暖羊羊", "age": 12, "sex": "男" }
+        // ]
+        // var result = _.filter(arr,function(item){
+        //     return item.age>10
+        // })
+        // console.log(result);
+        // /*6、contains   检测数组中是否含有某项*/
+        // var arr = [3,1,65,11,5,645,1,18,5];
+        // var result = _.contains(arr,3);
+        // console.log(result);
+        // /*7、max  数组中的最大值 */
+        // var arr = [3,1,65,11,5,645,1,18,5];
+        // var result = _.max(arr)
+        // console.log(result);
+        // /*8、min  数组中的最小值 */
+        // var arr = [3,1,65,11,5,645,1,18,5];
+        // var result = _.min(arr)
+        // console.log(result);
+        // /*返回一组对象数组中，年龄最小的：*/
+		// var arr = [
+		// 	{"xingming":"小明","age":12,"sex":"男"},
+		// 	{"xingming":"小红","age":18,"sex":"女"},
+		// 	{"xingming":"小绿","age":2,"sex":"女"},
+		// 	{"xingming":"小刚","age":2,"sex":"男"},
+		// 	{"xingming":"小灰","age":12,"sex":"男"}
+		// ];
+        // var result = _.max(arr,function(item){
+        //     return item.age
+        // })
+        // console.log(result);
+        /* 9、softBy  排序*/
+
+
+
+
+
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, target-densitydpi=device-dpi">
+    <!-- <meta http-equiv="Refresh" content="1" /> -->
+    <script src="./js/jquery.js"></script>
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            user-select: none;
+        }
+
+        ul {
+            width: 900px;
+            height: 400px;
+            overflow: hidden;
+            margin: 100px auto;
+            position: relative;
+        }
+
+        li {
+            position: absolute;
+            top: 0;
+            list-style: none;
+        }
+        li>a>img{
+            width: 600px;
+            height: 400px;
+        }
+        .no0{
+            left: 0;
+        }
+        .no1{
+            left: 150px;
+        }
+        .no2{
+            left: 300px;
+        }
+        .no3{
+            left: 450px;
+        }
+        .no4{
+            left: 600px;
+        }
+        .no5{
+            left: 750px;
+        }
+        
+    </style>
+</head>
+
+<body>
+    <ul>
+        <li class="no0"><a href="javascript:;"><img src="./image/6.jpg" alt=""></a></li>
+        <li class="no1"><a href="javascript:;"><img src="./image/1.jpg" alt=""></a></li>
+        <li class="no2"><a href="javascript:;"><img src="./image/2.jpg" alt=""></a></li>
+        <li class="no3"><a href="javascript:;"><img src="./image/3.jpg" alt=""></a></li>
+        <li class="no4"><a href="javascript:;"><img src="./image/4.jpg" alt=""></a></li>
+        <li class="no5"><a href="javascript:;"><img src="./image/5.jpg" alt=""></a></li>
+    </ul>
+    <script>
+        var no0=$(".no0");
+        var no1=$(".no1");
+        var no2=$(".no2");
+        var no3=$(".no3");
+        var no4=$(".no4");
+        var no5=$(".no5");
+        var li=$("li");
+        // console.log(no0);
+        // console.log(no1);
+        // console.log(no2);
+        // console.log(no3);
+        // console.log(no4);
+        // console.log(no5);
+
+        // 0   150   300   450    600   750 
+        // 0   600   660   720    780   840
+        //    0   60     660 
+        no0.mouseenter(function(){
+            $("li").stop(true);
+            no0.next().animate({"left":"600px"},1000).next().animate({"left":"660px"},1000).next().animate({"left":"720px"},1000).next().animate({"left":"780px"},1000).next().animate({"left":"840px"},1000)
+        })
+        no1.mouseenter(function(){
+            $("li").stop(true);
+            no0.next().animate({"left":"60px"},1000).next().animate({"left":"660px"},1000).next().animate({"left":"720px"},1000).next().animate({"left":"780px"},1000).next().animate({"left":"840px"},1000)
+        })
+
+        no2.mouseenter(function(){
+            $("li").stop(true);
+            no0.next().animate({"left":"60px"},1000).next().animate({"left":"120px"},1000).next().animate({"left":"720px"},1000).next().animate({"left":"780px"},1000).next().animate({"left":"840px"},1000)
+        })
+        no3.mouseenter(function(){
+            $("li").stop(true);
+            no0.next().animate({"left":"60px"},1000).next().animate({"left":"120px"},1000).next().animate({"left":"180px"},1000).next().animate({"left":"780px"},1000).next().animate({"left":"840px"},1000)
+        })
+        no4.mouseenter(function(){
+            $("li").stop(true);
+            no0.next().animate({"left":"60px"},1000).next().animate({"left":"120px"},1000).next().animate({"left":"180px"},1000).next().animate({"left":"240px"},1000).next().animate({"left":"840px"},1000)
+        })
+        no5.mouseenter(function(){
+            $("li").stop(true);
+            no0.next().animate({"left":"60px"},1000).next().animate({"left":"120px"},1000).next().animate({"left":"180px"},1000).next().animate({"left":"240px"},1000).next().animate({"left":"300px"},1000)
+        })
+        $("ul").mouseleave(function(){
+        // 0   150   300   450    600   750 
+
+            $("li").stop(true);
+            no0.animate({"left":"0"},1000).next().animate({"left":"150"},1000).next().animate({"left":"300"},1000).next().animate({"left":"450"},1000).next().animate({"left":"600"},1000).next().animate({"left":"750"},1000)
+        })
+
+
+
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, target-densitydpi=device-dpi">
+    <!-- <meta http-equiv="Refresh" content="1" /> -->
+    <script src="./js/jquery.js"></script>
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            user-select: none;
+        }
+        li{
+            list-style: none;
+        }
+        div{
+            width: 300px;
+            height: 300px;
+            margin:120px auto;
+        }
+        ul{
+            background-color: #f99;
+            font-size: 30px;
+            line-height: 50px;
+            text-align: center;
+            border: 1px solid #000000;
+        }
+        ul>li{
+            border-top: 1px solid #000000;
+            background-color: white;
+            color: black;
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+       <ul>
+           1
+           <li>01</li>
+           <li>02</li>
+           <li>03</li>
+       </ul>
+       <ul>
+           2
+           <li>01</li>
+           <li>02</li>
+           <li>03</li>
+       </ul>
+       <ul>
+           3
+           <li>01</li>
+           <li>02</li>
+           <li>03</li>
+       </ul>
+    </div>
+
+
+    <script>
+        $("ul")
+        .click(function(){
+            $(this)
+            .children()
+            .stop(true)
+            .slideToggle(1000)
+            .mouseenter(function(){
+                $(this).css({"backgroundColor":"pink","color":"white"})})
+            .mouseleave(function(){
+                $(this).css({"backgroundColor":"white","color":"black"})})
+            .parent()
+            .siblings()
+            .children()
+            .stop(true)
+            .slideUp(1000)
+        })
+        .mouseenter(function(){
+            $(this)
+            .css({"backgroundColor":"black","color":"white"})
+        })
+        .mouseleave(function(){
+            $(this)
+            .css({"backgroundColor":"#f99","color":"black"})
+        })
+        
+    </script>
+</body>
+
+</html>

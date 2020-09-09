@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, target-densitydpi=device-dpi">
+    <!-- <meta http-equiv="Refresh" content="1" /> -->
+    <link rel="stylesheet" href="../../css/index.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../css/gouwuche.css">
+    <script src="../../js/jquery.js"></script>
+    <title>Document</title>
+    <style>
+    </style>
+</head>
+
+<body>
+    <div class="table-responsive container">
+        <table class="table table-bordered table-condensed">
+            <thead id="thead">
+                <td class="col-lg-2">选择</td>
+                <td class="col-lg-2">名字</td>
+                <td class="col-lg-2">图片</td>
+                <td class="col-lg-1">单价</td>
+                <td class="col-lg-2">数量</td>
+                <td class="col-lg-1">总价</td>
+                <td class="col-lg-2">操作</td>
+            </thead>
+            <tbody id="tbody">
+
+            </tbody>
+            <tfoot>
+                <td><input type="checkbox" /><span>全选</span> </td>
+                <td>已选商品总价</td>
+                <td colspan="4" class="heji">0</td>
+                <td class="suan">去结算</td>
+            </tfoot>
+        </table>
+    </div>
+
+    <script>
+        /*
+        进来先判断有没有token看有没有登录,
+        如果没有登陆,直接返回首页,
+        如果登陆了再进行下面的操作
+        */
+        var token = localStorage.getItem("token");
+        var username = localStorage.getItem("username");
+        if (token && username) {
+            /*获取localStore里的gouwu*/
+            var a = JSON.parse(localStorage.getItem("gouwu"))
+            if (!a) {
+                $("table").html("暂无数据")
+            } else {
+                nm()
+            }
+        } else {
+            alert("请登录");
+            location.href = "./denglu.html"
+        }
+        /*减*/
+        $("tbody").on("click", ".left", function (ev) {
+            for (var i = 0; i < a.length; i++) {
+                if (a[i].name == $(this).parent().prev().prev().prev().html() && a[i].username == username) {
+                    var str = a.splice(i, 1)
+                    if (str[0].num > 1) {
+                        str[0].num -= 1;
+                    } else {
+                        str[0].num = str[0].num;
+                    }
+                    a.splice(i, 0, str[0])
+                }
+            }
+            localStorage.setItem("gouwu", JSON.stringify(a));
+            a = JSON.parse(localStorage.getItem("gouwu"))
+            nm()
+        })
+        /*加*/
+        $("tbody").on("click", ".right", function (ev) {
+            for (var i = 0; i < a.length; i++) {
+                if (a[i].name == $(this).parent().prev().prev().prev().html() && a[i].username == username) {
+                    var str = a.splice(i, 1)
+                    if (str[0].num < 10) {
+                        str[0].num += 1;
+                    } else {
+                        str[0].num = str[0].num;
+                    }
+                    a.splice(i, 0, str[0])
+                }
+            }
+            localStorage.setItem("gouwu", JSON.stringify(a));
+            a = JSON.parse(localStorage.getItem("gouwu"))
+            nm()
+        })
+        /*删除*/
+        $("tbody").on("click", ".del", function (ev) {
+            for (var i = 0; i < a.length; i++) {
+                if (a[i].name == $(this).prev().prev().prev().prev().prev().html() && a[i].username == username) {
+                    var str = a.splice(i, 1)
+                }
+            }
+            localStorage.setItem("gouwu", JSON.stringify(a));
+            a = JSON.parse(localStorage.getItem("gouwu"))
+            if (a.length) {
+                nm()
+            } else {
+                localStorage.setItem("gouwu", null);
+                $("table").html("暂无数据")
+            }
+        })
+
+
+
+        var he = 0;
+        function nm() {
+            $("tbody").empty()
+            for (i = 0; i < a.length; i++) {
+                if (a[i].username === username) {
+                    var zprice = (a[i].price * a[i].num).toFixed(2);
+                    $("tbody").append(`
+                        <tr>
+                            <td><input type="checkbox" class="input"/>选择</td>
+                            <td>${a[i].name}</td>
+                            <td><img src="${a[i].img}" alt=""></td>
+                            <td>${(a[i].price)}</td>
+                            <td><span class="
+glyphicon glyphicon-minus left"></span>${a[i].num}<span class="glyphicon glyphicon-plus right"></span></td>
+                            <td>${zprice}</td>
+                            <td class="del">删除</td>
+                        </tr>
+                        `)
+
+                    // if (a[i].status) {
+                    //     he += zprice
+                    // } else {
+                    //     he = he
+                    // }
+                    // $(".heji").text(he)
+
+                }
+            }
+        }
+        var str
+        $("tbody").on("click", ".input", function () {
+                str = 0
+            for (var i = 0; i < $(".input").length; i++) {
+                var a = +($($(".input")[i]).parent().next().next().next().next().next().html())
+                if ($($(".input")[i]).is(':checked') == true) {
+                    str += a
+                } else {
+                    str = str
+                }
+                $(".heji").text((str).toFixed(2))
+
+            }
+            console.log(a);
+            var result
+            for (var i = 0; i < $("tbody>tr>td>input").length; i++) {
+                // if()
+                result = true;
+                if ($($("tbody>tr>td>input")[i]).is(':checked') == false) {
+                    result = false;
+                    break
+                }
+            }
+            if (result === true) {
+                $("tfoot>tr>td>input").prop('checked', true).next().text("取消全选")
+
+            } else {
+                $("tfoot>tr>td>input").prop('checked', false).next().text("全选")
+            }
+        })
+        $("tfoot>tr>td>input").click(function () {
+            if ($("tfoot>tr>td>input").is(':checked') == true) {
+                str = 0
+                $(this).next().text("取消全选")
+                for (var i = 0; i < $("tbody>tr>td>input").length; i++) {
+                    $($("tbody>tr>td>input")[i]).prop('checked', true)
+                    var a = $($("tbody>tr>td>input")[i]).parent().parent().children().last().prev().text()
+                    str += +a
+                }
+            } else {
+                $(this).next().text("全选")
+                for (var i = 0; i < $("tbody>tr>td>input").length; i++) {
+                    $($("tbody>tr>td>input")[i]).prop('checked', false)
+                }
+                str = 0
+            }
+            $(".heji").text((str).toFixed(2))
+        }
+        )
+
+
+
+
+    </script>
+</body>
+
+</html>
