@@ -123,13 +123,14 @@
         /*获取地址栏？后的东西*/
         var sea = location.search;
         sea = decodeURI(sea.split("=")[1])
-        if (sea == "undefined") {
-            location.href = "./03首页.html"
+        console.log(sea);
+        if (sea==="undefined") {
+            location.href = "../index.html"
         } else {
             /*判断有没有登陆*/
             var a = localStorage.getItem("token");
             var b = localStorage.getItem("username");
-            if (a != "null" && b != "null") {
+            if (!a&&!b) {
                 $.ajax({
                     url: "http://192.168.1.107:3000/users/userinfo",
                     data: {
