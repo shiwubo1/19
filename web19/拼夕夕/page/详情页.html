@@ -134,7 +134,7 @@
                     dataType: "json",
                     success: function (res) {
                         if (res.state === 0) {
-                            
+
                             $(".dengdeng").html(`<a href="javascript:;">欢迎回来${res.userinfo.username}</a><span>|</span><a href="javascript:;" class="tuichu">退出登录</a>`)
                             $(".tuichu").click(function () {
                                 localStorage.setItem("token", null);
@@ -282,6 +282,8 @@
                                     username: username,
                                     /*商品id*/
                                     info: (sea),
+                                    /*状态*/
+                                    status: false,
                                     /*图片*/
                                     img: res.pict_url,
                                     /*单价*/
@@ -295,7 +297,8 @@
                                 var result;
                                 for (var i = 0; i < a.length; i++) {
                                     result = true;
-                                    if (a[i].info == (sea) && a[i].username == username) {
+                                    console.log(a);
+                                    if (a[i].info == sea && a[i].username == username) {
                                         var str = a.splice(i, 1)
                                         if (str[0].num < 10) {
                                             str[0].num += 1;
@@ -315,6 +318,8 @@
                                         info: (sea),
                                         /*图片*/
                                         img: res.pict_url,
+                                        /*状态*/
+                                        status: false,
                                         /*单价*/
                                         price: res.zk_final_price,
                                         /*商品名字*/

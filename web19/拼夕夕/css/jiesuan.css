@@ -1,0 +1,103 @@
+@charset "UTF-8";
+/*头部*/
+header {
+  width: 100%;
+  position: fixed;
+  background-color: #fff;
+  top: 0;
+  height: 141px;
+  z-index: 99;
+}
+header .denglu {
+  height: 30px;
+  font-size: 20px;
+  line-height: 30px;
+  background-color: #fafafa;
+}
+header .denglu div p {
+  float: left;
+}
+header .head {
+  height: 105px;
+  position: relative;
+}
+header .head .logo {
+  height: 105px;
+  width: 180px;
+}
+header .head .logo img {
+  margin-top: 20px;
+  width: 100%;
+}
+
+/*底部*/
+footer {
+  background-color: #fff;
+  height: 200px;
+  /*黑框区域*/
+  /*小图*/
+}
+footer .certificate {
+  height: 130px;
+  background-color: #3f3e3e;
+  padding-top: 27px;
+  box-sizing: border-box;
+}
+footer .certificate p {
+  font-size: 14px;
+  line-height: 14px;
+  text-align: center;
+  color: #b1b1b1;
+}
+footer .certificate .p {
+  margin: 17px auto;
+}
+footer .pic {
+  height: 70px;
+  display: flex;
+  justify-content: center;
+}
+footer .pic a {
+  text-decoration: none;
+  color: inherit;
+  text-align: center;
+  font-size: 16px;
+}
+footer .pic a img {
+  display: inline-block;
+  width: auto;
+  height: auto;
+  max-height: 50px;
+  line-height: 50px;
+  vertical-align: middle;
+  margin: 10px;
+}
+
+.center {
+  margin-top: 141px;
+  position: relative;
+}
+.center .xuan {
+  background-color: #ff9999;
+  width: 80%;
+  height: 500px;
+  left: 50%;
+  transform: translateX(-50%);
+  top: 70px;
+  position: absolute;
+}
+.center .kong {
+  width: 80%;
+  margin: 0 auto;
+  background-color: #fff;
+  border: 1px dashed #f99;
+  height: 80px;
+}
+.center .kong .jia {
+  font-size: 25px;
+  color: #f99;
+  text-align: center;
+  line-height: 80px;
+}
+
+/*# sourceMappingURL=jiesuan.css.map */

@@ -62,7 +62,7 @@
             location.href = "./denglu.html"
         }
         /*减*/
-        $("tbody").on("click", ".left", function () {
+        $("tbody").on("click", ".left", function (ev) {
             for (var i = 0; i < a.length; i++) {
                 if (a[i].name == $(this).parent().prev().prev().prev().html() && a[i].username == username) {
                     var str = a.splice(i, 1)
@@ -75,11 +75,11 @@
                 }
             }
             localStorage.setItem("gouwu", JSON.stringify(a));
-            a = JSON.parse(localStorage.getItem("gouwu"));
+            a = JSON.parse(localStorage.getItem("gouwu"))
             nm()
         })
         /*加*/
-        $("tbody").on("click", ".right", function () {
+        $("tbody").on("click", ".right", function (ev) {
             for (var i = 0; i < a.length; i++) {
                 if (a[i].name == $(this).parent().prev().prev().prev().html() && a[i].username == username) {
                     var str = a.splice(i, 1)
@@ -96,7 +96,7 @@
             nm()
         })
         /*删除*/
-        $("tbody").on("click", ".del", function () {
+        $("tbody").on("click", ".del", function (ev) {
             for (var i = 0; i < a.length; i++) {
                 if (a[i].name == $(this).prev().prev().prev().prev().prev().html() && a[i].username == username) {
                     var str = a.splice(i, 1)
@@ -105,13 +105,6 @@
             localStorage.setItem("gouwu", JSON.stringify(a));
             a = JSON.parse(localStorage.getItem("gouwu"))
             if (a.length) {
-                sad = 0;
-                for (var i = 0; i < a.length; i++) {
-                    if (a[i].status) {
-                        sad += +$(this).prev().text()
-                    }
-                }
-                $(".heji").text((sad).toFixed(2))
                 nm()
             } else {
                 localStorage.setItem("gouwu", null);
@@ -122,7 +115,7 @@
 
 
         function nm() {
-            var sad = 0;
+            var he = 0;
             $("tbody").empty()
             for (i = 0; i < a.length; i++) {
                 if (a[i].username === username) {
@@ -133,54 +126,48 @@
                             <td>${a[i].name}</td>
                             <td><img src="${a[i].img}" alt=""></td>
                             <td>${(a[i].price)}</td>
-                            <td><span class="glyphicon glyphicon-minus left"></span>${a[i].num}<span class="glyphicon glyphicon-plus right"></span></td>
+                            <td><span class="
+glyphicon glyphicon-minus left"></span>${a[i].num}<span class="glyphicon glyphicon-plus right"></span></td>
                             <td>${zprice}</td>
                             <td class="del">删除</td>
                         </tr>
                         `)
-                    if (a[i].status == true) {
-                        $($(".input")[i]).prop('checked', true);
-                        sad += +zprice
+                    if (a[i].status) {
+                        $("input").prop("checkbox", true);
+                        he += +zprice
                     } else {
-                        $($(".input")[i]).prop('checked', false);
+                        $("input").prop("checkbox", false)
+                        he = he
                     }
-                }
-            } for (var i = 0; i < $("tbody>tr>td>input").length; i++) {
-                // if()
-                if ($($("tbody>tr>td>input")[i]).is(':checked') == false) {
-                    break;
-                }
-            }
-            if (i === $("tbody>tr>td>input").length) {
-                $("tfoot>tr>td>input").prop('checked', true).next().text("取消全选")
+                    $(".heji").text(he)
 
-            } else {
-                $("tfoot>tr>td>input").prop('checked', false).next().text("全选")
+                }
             }
-            $(".heji").text((sad).toFixed(2))
         }
-
         /*单选*/
+        var str
         $("tbody").on("click", ".input", function () {
-            a = JSON.parse(localStorage.getItem("gouwu"))
-            for (var i = 0; i < a.length; i++) {
-
-                if (a[i].name == $(this).parent().next().html() && a[i].username == username) {
-                    var str = a.splice(i, 1)
-                    str[0].status = !str[0].status;
-                    a.splice(i, 0, str[0])
+            str = 0
+            for (var i = 0; i < $(".input").length; i++) {
+                var a = +($($(".input")[i]).parent().next().next().next().next().next().html())
+                if ($($(".input")[i]).is(':checked') == true) {
+                    str += a
+                } else {
+                    str = str
                 }
+                $(".heji").text((str).toFixed(2))
             }
-            localStorage.setItem("gouwu", JSON.stringify(a));
-            a = JSON.parse(localStorage.getItem("gouwu"))
-            nm()
+            console.log(a);
+            var result
             for (var i = 0; i < $("tbody>tr>td>input").length; i++) {
                 // if()
+                result = true;
                 if ($($("tbody>tr>td>input")[i]).is(':checked') == false) {
-                    break;
+                    result = false;
+                    break
                 }
             }
-            if (i === $("tbody>tr>td>input").length) {
+            if (result === true) {
                 $("tfoot>tr>td>input").prop('checked', true).next().text("取消全选")
 
             } else {
@@ -188,51 +175,27 @@
             }
         })
 
-        /*全选*/
+        /*复选*/
         $("tfoot>tr>td>input").click(function () {
-            a = JSON.parse(localStorage.getItem("gouwu"))
             if ($("tfoot>tr>td>input").is(':checked') == true) {
-                for (var i = 0; i < a.length; i++) {
-                    if (a[i].username == username) {
-                        var str = a.splice(i, 1)
-                        str[0].status = true;
-                        a.splice(i, 0, str[0])
-                    }
-                    localStorage.setItem("gouwu", JSON.stringify(a));
-                    a = JSON.parse(localStorage.getItem("gouwu"))
-                }
-                sad = 0
+                str = 0
                 $(this).next().text("取消全选")
                 for (var i = 0; i < $("tbody>tr>td>input").length; i++) {
                     $($("tbody>tr>td>input")[i]).prop('checked', true)
                     var a = $($("tbody>tr>td>input")[i]).parent().parent().children().last().prev().text()
-                    sad += +a
+                    str += +a
                 }
             } else {
-                console.log(a);
-                for (var i = 0; i < a.length; i++) {
-                    if (a[i].username == username) {
-                        var str = a.splice(i, 1)
-                        str[0].status = false;
-                        a.splice(i, 0, str[0])
-                    }
-                    localStorage.setItem("gouwu", JSON.stringify(a));
-                    a = JSON.parse(localStorage.getItem("gouwu"))
-                }
-
                 $(this).next().text("全选")
                 for (var i = 0; i < $("tbody>tr>td>input").length; i++) {
                     $($("tbody>tr>td>input")[i]).prop('checked', false)
                 }
-                sad = 0
+                str = 0
             }
-            $(".heji").text((sad).toFixed(2))
+            $(".heji").text((str).toFixed(2))
         }
         )
-        $(".suan").click(function () {
-            localStorage.setItem("zongjia", $(".heji").text());
-            location.href = "./结算.html"
-        })
+
 
 
 

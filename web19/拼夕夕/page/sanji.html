@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, target-densitydpi=device-dpi">
+    <!-- <meta http-equiv="Refresh" content="1" /> -->
+    <title>Document</title>
+    <script src="../../js/jquery.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            user-select: none;
+        }
+
+        .div {
+            width: 500px;
+            margin: 20px auto;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="div">
+        <select name="" id="sheng">
+            <option value="0">请选择省</option>
+        </select>
+        <select name="" id="shi">
+            <option value="0">请选择市</option>
+        </select>
+        <select name="" id="qu">
+            <option value="0">请选择区</option>
+        </select>
+    </div>
+
+
+    <script>
+        $.ajax({
+            url: "../js/sanji.json",
+            success: function (res) {
+                // console.log(res);
+                var str = '<option value="0">请选择省</option>'
+                for (var i = 0; i < res.length; i++) {
+                    str += `<option value="${res[i].id}"> ${res[i].name} </option>`
+                }
+                $("#sheng").html(str)
+            }
+        })
+
+        $("#sheng").change(function () {
+            $.ajax({
+                url: "../js/sanji.json",
+                dataType: "json",
+                success: function (res) {
+                    var id = $("#sheng").val();
+                    // console.log(res);
+                    for (var i = 0; i < res.length; i++) {
+                        if (res[i].id === id) {
+                            var str = '<option value="0">请选择市</option>'
+                            for (var n = 0; n < res[i].sub.length; n++) {
+                                str += `<option value="${res[i].sub[n].id}"> ${res[i].sub[n].name} </option>`
+                            }
+                            $("#shi").html(str)
+                        }
+                    }
+                }
+            })
+
+        })
+
+        $("#shi").change(function () {
+            $.ajax({
+                url: "../js/sanji.json",
+                dataType: "json",
+                success: function (res) {
+
+                    var id = $("#sheng").val()
+                    var shiid = $("#shi").val()
+                    // console.log(res);
+                    for (var i = 0; i < res.length; i++) {
+                        // console.log(res[i].id);
+                        if (res[i].id === id) {
+                            for (var n = 0; n < res[i].sub.length; n++) {
+                                // console.log(res[i].sub[n]);
+                                if (res[i].sub[n].id === shiid) {
+                                    var str = ''
+                                    for (var s = 0; s < res[i].sub[n].sub.length; s++) {
+                                        console.log(res[i].sub[n].sub[s]);
+                                        str += `<option value="${res[i].sub[n].sub[s].id}"> ${res[i].sub[n].sub[s].name} </option>`
+                                    }
+                                    $("#qu").html(str)
+                                }
+                                // $("#qu").html(str)
+                            }
+                        }
+                    }
+                }
+            })
+
+        })
+
+
+
+
+    </script>
+</body>
+
+</html>
