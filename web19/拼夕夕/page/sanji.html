@@ -26,6 +26,7 @@
 
 <body>
     <div class="div">
+        <input type="text" name="" id="inp"><br>
         <select name="" id="sheng">
             <option value="0">请选择省</option>
         </select>
@@ -39,6 +40,8 @@
 
 
     <script>
+        /*省市区三级导航*/
+        /*省份*/
         $.ajax({
             url: "../js/sanji.json",
             success: function (res) {
@@ -50,7 +53,7 @@
                 $("#sheng").html(str)
             }
         })
-
+        /*市*/
         $("#sheng").change(function () {
             $.ajax({
                 url: "../js/sanji.json",
@@ -63,6 +66,7 @@
                             var str = '<option value="0">请选择市</option>'
                             for (var n = 0; n < res[i].sub.length; n++) {
                                 str += `<option value="${res[i].sub[n].id}"> ${res[i].sub[n].name} </option>`
+                                $("#inp").val(`你选择的是${res[i].name}`)
                             }
                             $("#shi").html(str)
                         }
@@ -71,7 +75,7 @@
             })
 
         })
-
+        /*区*/
         $("#shi").change(function () {
             $.ajax({
                 url: "../js/sanji.json",
@@ -91,6 +95,7 @@
                                     for (var s = 0; s < res[i].sub[n].sub.length; s++) {
                                         console.log(res[i].sub[n].sub[s]);
                                         str += `<option value="${res[i].sub[n].sub[s].id}"> ${res[i].sub[n].sub[s].name} </option>`
+                        $("#inp").val(`你选择的是${res[i].name},${res[i].sub[n].name}`)
                                     }
                                     $("#qu").html(str)
                                 }
@@ -100,7 +105,6 @@
                     }
                 }
             })
-
         })
 
 

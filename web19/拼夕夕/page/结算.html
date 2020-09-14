@@ -9,7 +9,6 @@
         content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, target-densitydpi=device-dpi">
     <!-- <meta http-equiv="Refresh" content="1" /> -->
     <link rel="stylesheet" href="../css/jiesuan.css">
-    <link rel="stylesheet" href="../../css/index.css">
     <link rel="stylesheet" href="../../css/bootstrap.css">
     <title>Document</title>
     <script src="../../js/jquery.js"></script>
@@ -38,17 +37,21 @@
     </header>
 
     <div class="center container">
-        <h2>请选择收货地址:</h2>
-
-
+        <div class="fukuan">去付款</div>
+        <h2>你需要支付<span>0</span>元</h2>
+        <div class="xinxi">
+        </div>
+        <h3>请选择收货地址:</h3>
+        <!-- 动态添加地址 -->
+        <div class="bbx">
+        </div>
         <!-- 三级联动 -->
-
         <div class="xuan">
-
-            <div id="test"></div>
-
         </div>
 
+        <div class="kong">
+            <div class="jia">+ 添加收货地址</div>
+        </div>
     </div>
 
 
@@ -90,18 +93,303 @@
 
     </footer>
 
-    <!-- <script src="../js/province.js"></script> -->
-    <!--引入我们编写的省市县jquery插件-->
-    <script src="../js/jquery.ProvinceCity.js" type="text/javascript"></script>
-    <!--引入我们编写的js省市县基础数据-->
-    <script src="../js/provincesdata.js" type="text/javascript"></script>
-    <script>
-        var a = localStorage.getItem("zongjia")
-        console.log(a);
-        $(function () {
-            $("#test").ProvinceCity();
-        });
 
+    <script>
+        localStorage.setItem("zongjia", 100)
+        var z = localStorage.getItem("zongjia");
+        $("h2>span").text(z)
+        local();
+        /*点击加号*/
+        $(".jia").click(function () {
+            $(".xuan").css("display", "block")
+            $(".xuan").html(`                        <div class="sanji">
+                <select name="" id="sheng">
+                    <option value="0">请选择省</option>
+                </select>
+                <select name="" id="shi">
+                    <option value="0">请选择市</option>
+                </select>
+                <select name="" id="qu">
+                    <option value="0">请选择区</option>
+                </select>
+                <br>
+                详细地址:<input type="text" name="" class="xiang" placeholder="请输入详细地址"><br>
+                收 件 人 :<input type="text" name="" class="name" placeholder="请输入名字">
+                <br>
+                手 机 号 :<input type="text" name="" class="tel" placeholder="请输入手机号">
+            </div>
+            <p class="dizhi">你的地址是:</p>
+            <input type="button" value="确定" class="yes">
+            <input type="button" value="取消" class="no">
+`)
+            sanji()
+            xiang()
+        })
+        /*省市区三级导航*/
+        function sanji() {
+            /*省*/
+            $.ajax({
+                url: "../js/sanji.json",
+                success: function (res) {
+                    // console.log(res);
+                    var str = '<option value="0">请地址省</option>'
+                    for (var i = 0; i < res.length; i++) {
+                        str += `<option value="${res[i].id}"> ${res[i].name} </option>`
+                    }
+                    $("#sheng").html(str)
+                }
+            })
+            /*市*/
+            $("#sheng").change(function () {
+                $.ajax({
+                    url: "../js/sanji.json",
+                    dataType: "json",
+                    success: function (res) {
+                        var id = $("#sheng").val();
+                        // console.log(res);
+                        for (var i = 0; i < res.length; i++) {
+                            if (res[i].id === id) {
+                                var str = '<option value="0">请选择市</option>'
+                                for (var n = 0; n < res[i].sub.length; n++) {
+                                    str += `<option value="${res[i].sub[n].id}"> ${res[i].sub[n].name} </option>`
+                                    $(".dizhi").text(`你的地址是:${res[i].name}`)
+                                }
+                                $("#shi").html(str)
+                                $("#qu").html('<option value="0">请选择区</option>')
+
+                            }
+                        }
+                    }
+                })
+            })
+            /*区*/
+            $("#shi").change(function () {
+                $.ajax({
+                    url: "../js/sanji.json",
+                    dataType: "json",
+                    success: function (res) {
+                        var id = $("#sheng").val()
+                        var shiid = $("#shi").val()
+                        // console.log(res);
+                        for (var i = 0; i < res.length; i++) {
+                            // console.log(res[i].id);
+                            if (res[i].id === id) {
+                                for (var n = 0; n < res[i].sub.length; n++) {
+                                    // console.log(res[i].sub[n]);
+                                    if (res[i].sub[n].id === shiid) {
+                                        var str = ''
+                                        for (var s = 0; s < res[i].sub[n].sub.length; s++) {
+                                            str += `<option value="${res[i].sub[n].sub[s].id}"> ${res[i].sub[n].sub[s].name} </option>`
+                                            $(".dizhi").text(`你的地址是:${res[i].name},${res[i].sub[n].name}`)
+                                        }
+                                        $("#qu").html(str)
+                                    }
+                                    // $("#qu").html(str)
+                                }
+                            }
+                        }
+                    }
+                })
+            })
+            /*选定区以后p的html*/
+            $("#qu").change(function () {
+                $.ajax({
+                    url: "../js/sanji.json",
+                    dataType: "json",
+                    success: function (res) {
+                        var id = $("#sheng").val()
+                        var shiid = $("#shi").val()
+                        // console.log(res);
+                        for (var i = 0; i < res.length; i++) {
+                            // console.log(res[i].id);
+                            if (res[i].id === id) {
+                                for (var n = 0; n < res[i].sub.length; n++) {
+                                    // console.log(res[i].sub[n]);
+                                    if (res[i].sub[n].id === shiid) {
+                                        for (var s = 0; s < res[i].sub[n].sub.length; s++) {
+                                            var quid = $("#qu").val()
+                                            if (res[i].sub[n].sub[s].id === quid)
+                                                $(".dizhi").text(`你的地址是:${res[i].name},${res[i].sub[n].name},${res[i].sub[n].sub[s].name}`)
+                                        }
+                                    }
+                                    // $("#qu").html(str)
+                                }
+                            }
+                        }
+                    }
+                })
+            })
+
+        }
+        /*信息输完关闭输入框*/
+        function xiang() {
+            $(".xiang").blur(function () {
+                $(".dizhi").text($(".dizhi").text() + $(this).val())
+            })
+            $(".yes").click(function () {
+                var dizhi = $(".xiang").val().replace(/\s+/g, "");
+                var name = $(".name").val().replace(/\s+/g, "");
+                var tel = $(".tel").val()
+                var reg = /^(13[0-9]|14[5|7]|15[0|1|2|3|5|6|7|8|9]|18[0|1|2|3|5|6|7|8|9])\d{8}$/
+                if (dizhi == "") {
+                    alert("请输入详细地址");
+                    return;
+                } else if (name == "") {
+                    alert("请输入收件名字");
+                    return;
+                } else if (tel == "") {
+                    alert("请输入收件手机号");
+                    return;
+                } else if (!reg.test(tel)) {
+                    alert("输入的手机号格式错误");
+                    return;
+                } else {
+                    di = $(".dizhi").text().split(":")[1]
+                    $(".xuan").empty();
+                    /*获取本地存储,判断有没有数据*/
+                    var a = JSON.parse(localStorage.getItem("dizhi"))
+                    console.log(a);
+                    if (a) {
+                        a.push({
+                            dizhi: di,
+                            name: name,
+                            tel: tel,
+                        })
+                    } else {
+                        a = [{
+                            dizhi: di,
+                            name: name,
+                            tel: tel,
+                        }]
+                    }
+                    localStorage.setItem("dizhi", JSON.stringify(a))
+                    $(".xuan").css("display", "none");
+                    local();
+                }
+            })
+            $(".no").click(function () {
+                $(".xuan").css("display", "none");
+                $(".xuan").empty()
+                local();
+            })
+        }
+        /*获取本地存储渲染数据*/
+        function local() {
+            var a = JSON.parse(localStorage.getItem("dizhi"))
+            if (a) {
+                var str = ""
+                for (var i = 0; i < a.length; i++) {
+                    if (i === 0) {
+                        str += (`        
+                        <div class="box">
+                            <input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked>
+                            <div>
+                                <p><span>${a[i].name}</span><span>${a[i].tel}</span></p>
+                                <p>${a[i].dizhi}</p>
+                            </div>
+                            <div class="caozuo">
+                        <div class="del">删除</div>
+                        <div class="moren">设为默认</div>
+                    </div>
+
+                        </div>
+                    `)
+                    } else {
+                        str += (`
+                     <div class="box">
+                        <input type="radio" name="optionsRadios" id="optionsRadios1" value="option1">
+                        <div>
+                            <p><span>${a[i].name}</span><span>${a[i].tel}</span></p>
+                            <p>${a[i].dizhi}</p>
+                        </div>
+                        <div class="caozuo">
+                        <div class="del">删除</div>
+                        <div class="moren">设为默认</div>
+                    </div>
+
+                    </div>
+                `)
+                    }
+                    $(".bbx").html(str)
+                }
+            } else {
+                return;
+            }
+        }
+        /*点击删除按钮*/
+        /*点击删除按钮,获取到本地存储*/
+        $(".center").on("click", ".del", function () {
+            var a = JSON.parse(localStorage.getItem("dizhi"));
+            console.log(a);
+            /*遍历获取到的本地存储a*/
+            var name = $(this).parent().prev().children().first().children().first().text();
+            var tel = $(this).parent().prev().children().first().children().last().text();
+            var mail = $(this).parent().prev().children().last().text();
+
+            for (var i = 0; i < a.length; i++) {
+                /*判断本地存储跟html中的数据是否一样,如果一样了就删除这个数据*/
+                console.log(name);
+                console.log(tel);
+                console.log(mail);
+                if (a[i].dizhi == mail && a[i].name == name && a[i].tel == tel) {
+                    a.splice(i, 1)
+                }
+            }
+            if (a.length === 0) {
+                a = null
+            }
+            localStorage.setItem("dizhi", JSON.stringify(a))
+            // console.log(a);
+            local()
+        })
+
+        /*点击设为默认*/
+        /*点击默认按钮,获取到本地存储*/
+        $(".center").on("click", ".moren", function () {
+            var a = JSON.parse(localStorage.getItem("dizhi"));
+            console.log(a);
+            /*遍历获取到的本地存储a*/
+            var name = $(this).parent().prev().children().first().children().first().text();
+            var tel = $(this).parent().prev().children().first().children().last().text();
+            var mail = $(this).parent().prev().children().last().text();
+
+            for (var i = 0; i < a.length; i++) {
+                /*判断本地存储跟html中的数据是否一样,如果一样了就删除这个数据*/
+                console.log(name);
+                console.log(tel);
+                console.log(mail);
+                if (a[i].dizhi == mail && a[i].name == name && a[i].tel == tel) {
+                    var str = a.splice(i, 1)
+                    a.unshift(str[0]);
+                }
+            }
+            localStorage.setItem("dizhi", JSON.stringify(a))
+            local()
+            // console.log(a);
+        })
+        $(".fukuan").click(function () {
+            $(".xinxi").css("display","block")
+            var pirce = $("h2>span").text();
+            for (var i = 0; i < $(".box").length; i++) {
+                if ($($(".box")[i]).children().first()[0].checked === true) {
+                    var name = $($(".box")[i]).children().eq(1).children().first().children().first().text();
+                    var tel = $($(".box")[i]).children().eq(1).children().first().children().last().text();
+                    var mail = $($(".box")[i]).children().eq(1).children().last().text()
+                }
+            }
+            $(".xinxi").html(`
+            <div class="xx">X</div>
+            <h3>请确认信息,并扫码付款</h3>
+            <p> 付 款 :<span>${pirce}</span>元</p>
+            <p>收货人:<span>${name}</span></p>
+            <p>联系方式:<span>${tel}</span></p>
+            <p>收货地址:<span>${mail}</span></p>
+            <div class="img"><img src="../image/shoukuan.png" alt=""></div>
+            `)
+            $(".xx").click(function(){
+                $(".xinxi").css("display","none").empty()
+            })
+        })
 
 
 

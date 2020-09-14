@@ -152,7 +152,6 @@ footer .pic a img {
   position: absolute;
   left: 420px;
   top: 0;
-  background-size: 1600px 1600px;
   display: none;
   z-index: 99;
 }

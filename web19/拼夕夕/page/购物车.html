@@ -22,12 +22,13 @@
         <table class="table table-bordered table-condensed">
             <thead id="thead">
                 <td class="col-lg-2">选择</td>
-                <td class="col-lg-2">名字</td>
+                <td class="col-lg-2">商品名字</td>
+                <td class="col-lg-1">商品id</td>
                 <td class="col-lg-2">图片</td>
                 <td class="col-lg-1">单价</td>
                 <td class="col-lg-2">数量</td>
                 <td class="col-lg-1">总价</td>
-                <td class="col-lg-2">操作</td>
+                <td class="col-lg-1">操作</td>
             </thead>
             <tbody id="tbody">
 
@@ -35,7 +36,7 @@
             <tfoot>
                 <td><input type="checkbox" /><span>全选</span> </td>
                 <td>已选商品总价</td>
-                <td colspan="4" class="heji">0</td>
+                <td colspan="5" class="heji">0</td>
                 <td class="suan">去结算</td>
             </tfoot>
         </table>
@@ -47,6 +48,9 @@
         如果没有登陆,直接返回首页,
         如果登陆了再进行下面的操作
         */
+
+        var token = localStorage.setItem("token",1351653165112441);
+        var username = localStorage.setItem("username","a123456");
         var token = localStorage.getItem("token");
         var username = localStorage.getItem("username");
         if (token && username) {
@@ -64,7 +68,7 @@
         /*减*/
         $("tbody").on("click", ".left", function () {
             for (var i = 0; i < a.length; i++) {
-                if (a[i].name == $(this).parent().prev().prev().prev().html() && a[i].username == username) {
+                if (a[i].info == $(this).parent().prev().prev().prev().html() && a[i].username == username) {
                     var str = a.splice(i, 1)
                     if (str[0].num > 1) {
                         str[0].num -= 1;
@@ -81,7 +85,7 @@
         /*加*/
         $("tbody").on("click", ".right", function () {
             for (var i = 0; i < a.length; i++) {
-                if (a[i].name == $(this).parent().prev().prev().prev().html() && a[i].username == username) {
+                if (a[i].info == $(this).parent().prev().prev().prev().html() && a[i].username == username) {
                     var str = a.splice(i, 1)
                     if (str[0].num < 10) {
                         str[0].num += 1;
@@ -98,7 +102,7 @@
         /*删除*/
         $("tbody").on("click", ".del", function () {
             for (var i = 0; i < a.length; i++) {
-                if (a[i].name == $(this).prev().prev().prev().prev().prev().html() && a[i].username == username) {
+                if (a[i].info == $(this).prev().prev().prev().prev().prev().html() && a[i].username == username) {
                     var str = a.splice(i, 1)
                 }
             }
@@ -131,6 +135,7 @@
                         <tr>
                             <td><input type="checkbox" class="input"/>选择</td>
                             <td>${a[i].name}</td>
+                            <td>${a[i].info}</td>
                             <td><img src="${a[i].img}" alt=""></td>
                             <td>${(a[i].price)}</td>
                             <td><span class="glyphicon glyphicon-minus left"></span>${a[i].num}<span class="glyphicon glyphicon-plus right"></span></td>
@@ -165,7 +170,7 @@
             a = JSON.parse(localStorage.getItem("gouwu"))
             for (var i = 0; i < a.length; i++) {
 
-                if (a[i].name == $(this).parent().next().html() && a[i].username == username) {
+                if (a[i].info == $(this).parent().next().next().html() && a[i].username == username) {
                     var str = a.splice(i, 1)
                     str[0].status = !str[0].status;
                     a.splice(i, 0, str[0])

@@ -96,8 +96,8 @@ header {
 /* 轮播图 */
 #box {
     background-color: #fff;
-    height: 515px;
-    margin: 141px auto 0;
+    height          : 515px;
+    margin          : 141px auto 0;
 }
 
 .carousel-inner>.item>img {
@@ -121,7 +121,6 @@ header {
 /*底部*/
 footer {
     background-color: #fff;
-
     padding-top: 60px;
     height     : 639px;
 
@@ -131,7 +130,6 @@ footer {
         height          : 240px;
         margin          : auto;
         background-color: #fff;
-
         .relation_left {
             float       : left;
             box-sizing  : border-box;
@@ -388,11 +386,13 @@ nav {
         width : 500px;
         height: 50px;
         margin: 30px auto;
+
         ul {
             width          : 500px;
             height         : 500px;
             display        : flex;
             justify-content: space-around;
+
             li {
                 border          : 1px solid #000000;
                 width           : 50px;
@@ -402,9 +402,30 @@ nav {
                 line-height     : 50px;
                 font-size       : 20px;
             }
+
             .active {
                 background-color: yellowgreen;
             }
         }
+    }
+}
+
+/*响应式(媒体查询)*/
+@media screen and (max-width: 1200px) {
+    .nav{
+        display: none;
+    }
+    .relation_left{
+        display: none;
+    }
+    .invite>a{
+        font-size: 10px;
+    }
+    .certificate{
+        font-size: 10px;
+        line-height: 10px;
+    }
+    .pic{
+
     }
 }

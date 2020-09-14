@@ -345,4 +345,24 @@ nav .container .bao .active {
   background-color: yellowgreen;
 }
 
+/*响应式(媒体查询)*/
+@media screen and (max-width: 1200px) {
+  .nav {
+    display: none;
+  }
+
+  .relation_left {
+    display: none;
+  }
+
+  .invite > a {
+    font-size: 10px;
+  }
+
+  .certificate {
+    font-size: 10px;
+    line-height: 10px;
+  }
+}
+
 /*# sourceMappingURL=shouye.css.map */
