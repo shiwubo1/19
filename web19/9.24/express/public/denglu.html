@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, target-densitydpi=device-dpi">
+    <!-- <meta http-equiv="Refresh" content="1" /> -->
+    <link rel="stylesheet" href="./stylesheets/bootstrap.css">
+    <script src="./javascripts/jquery.js"></script>
+
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            user-select: none;
+        }
+
+
+        form {
+            width: 500px;
+            height: 500px;
+            margin: 50px auto;
+        }
+
+        p {
+            height: 50px;
+            line-height: 20px;
+            margin-bottom: 30px;
+        }
+
+        p>input {
+            width: 300px;
+            height: 40px;
+            outline: none;
+        }
+
+        p>label {
+            width: 100px;
+        }
+
+        #button {
+            width: 50px;
+            height: 30px;
+        }
+    </style>
+</head>
+
+<body>
+    <form action="" autocomplete="off">
+        <p>
+            <label for="">账号:</label>
+            <input type="text" name="" id="username">
+        </p>
+        <p>
+            <label for="">密码:</label>
+            <input type="text" name="" id="password">
+        </p>
+        <input type="button" name="" id="button" value="登录">
+    </form>
+    <script>
+        $("#button").click(()=>{
+            let username = $("#username").val();
+            let password = $("#password").val();
+            if (!username) {
+                alert("账号不能为空");
+                return;
+            }
+            if (!password) {
+                alert("密码不能为空");
+                return;
+            }
+
+            $.ajax({
+                url:"http://localhost:3000/page/denglu",
+                type:"get",
+                dataType:"json",
+                data:{
+                    username,
+                    password
+                },
+                success:(res)=>{
+                    console.log(res);
+                    if(res.code===1){
+                        alert("未注册,请先注册")
+                    }else if(res.code === 0){
+                        alert("登陆成功");
+                        location.href="./index.html"||"http://localhost:3000/index.html"
+                    }
+                }
+            })
+        
+        
+        })
+
+    </script>
+</body>
+
+</html>

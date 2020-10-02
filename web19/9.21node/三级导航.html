@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, target-densitydpi=device-dpi">
+    <!-- <meta http-equiv="Refresh" content="1" /> -->
+    <link rel="stylesheet" href="../css/bootstrap.css">
+    <script src="../js/jquery.js"></script>
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            user-select: none;
+        }
+       
+        li {
+            margin-top: 40px;
+            list-style: none;
+        }
+
+        .center {
+            width: 90%;
+            margin: 0 auto;
+            border: 1px solid red;
+        }
+
+        .center>img {
+            display: inline-block;
+            width: 100%;
+        }
+
+        .center>p {
+            margin: 0 auto;
+            width: 100px;
+            line-height: 50px;
+            text-align: center;
+            background-color: #f99;
+            border-radius: 25px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <ul class="row">
+            
+        </ul>
+    </div>
+
+
+    <script>
+        $.ajax({
+            url: "http://192.168.1.105:8080/",
+            data: "get",
+            dataType: "json",
+            success(res) {
+                console.log(res);
+                res = res.data;
+                let a = ""
+                res.forEach(item => {
+                    a += `
+                    <li class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
+                         <div class="center">
+                            <img src="${item.icon}" alt="">
+                            <p>${item.name}</p>
+                        </div>
+                    </li>
+                    `
+                });
+                $(".row").html(a)
+            }
+        })
+    </script>
+</body>
+
+</html>

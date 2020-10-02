@@ -1,0 +1,44 @@
+* {
+  margin: 0;
+  padding: 0;
+  user-select: none;
+}
+
+.left {
+  border: 1px solid red;
+  width: 300px;
+  height: 500px;
+  float: left;
+  padding: 30px;
+  box-sizing: border-box;
+}
+
+.center {
+  width: 200px;
+  height: 500px;
+  float: left;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  justify-content: space-evenly;
+}
+.center p {
+  line-height: 20px;
+  border: 1px solid black;
+}
+
+.right {
+  border: 1px solid red;
+  width: 300px;
+  height: 500px;
+  float: left;
+  padding: 30px;
+  box-sizing: border-box;
+}
+
+label {
+  display: block;
+  line-height: 30px;
+}
+
+/*# sourceMappingURL=jquery.css.map */

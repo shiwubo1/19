@@ -1,0 +1,16 @@
+.box {
+  width: 500px;
+  height: 500px;
+  border: 1px solid red;
+  margin: 50px auto;
+}
+
+.active {
+  background-color: blueviolet;
+}
+
+span {
+  background-color: #red;
+}
+
+/*# sourceMappingURL=zhao.css.map */

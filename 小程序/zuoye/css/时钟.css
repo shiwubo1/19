@@ -1,0 +1,101 @@
+* {
+  margin: 0;
+  padding: 0;
+  user-select: none;
+}
+
+.yuan {
+  width: 500px;
+  height: 500px;
+  border: 1px solid red;
+  border-radius: 50%;
+  margin: 100px auto;
+  position: relative;
+}
+
+.shu1 {
+  width: 2px;
+  height: 30px;
+  background-color: red;
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.shu2 {
+  width: 30px;
+  height: 2px;
+  background-color: red;
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.shu3 {
+  width: 2px;
+  height: 30px;
+  background-color: red;
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.shu4 {
+  width: 30px;
+  height: 2px;
+  background-color: red;
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.shu5 {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background-color: red;
+  position: absolute;
+  bottom: 50%;
+  left: 50%;
+  transform: translateX(-50%);
+  transform: translateY(-50%);
+}
+
+.shi {
+  width: 5px;
+  height: 100px;
+  background-color: red;
+  position: absolute;
+  bottom: 50%;
+  left: 50%;
+  transform: translateX(-50%);
+  transform-origin: bottom;
+}
+
+.fen {
+  width: 5px;
+  height: 150px;
+  background-color: green;
+  position: absolute;
+  bottom: 50%;
+  left: 50%;
+  transform-origin: bottom;
+  transform: translateX(-50%);
+}
+
+.miao {
+  width: 5px;
+  height: 200px;
+  background-color: blue;
+  position: absolute;
+  bottom: 50%;
+  transform-origin: bottom;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+/*# sourceMappingURL=%E6%97%B6%E9%92%9F.css.map */

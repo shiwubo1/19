@@ -1,0 +1,25 @@
+<!--pages/xiangqing/xiangqing.wxml-->
+<!-- <navigator url="../shop/shop" open-type="switchTab">跳转到新页面</navigator>   -->
+<view class="inp">
+    <input type="text" name="" id="" bindblur="inblur"/>
+    <button type="primary" size="mini" bindtap="taps">按钮</button>
+</view>
+<view class="=info">
+    <view class="box"  wx:for="{{infoList}}" bindtap="list" data-id="{{item.item_id}}">
+        <view class="infoname">
+            {{item.category_name}}
+        </view>
+        <image class="yhq" bindtap="yhq" src="{{item.pict_url}}" />
+        <view class="di">
+        <view data-yhq="{item.coupon_share_url}">
+            领取优惠券
+        </view>
+        <view class="jia">
+            {{item.zk_final_price}}
+        </view>
+        </view>   
+    </view>
+
+      
+</view>
+    

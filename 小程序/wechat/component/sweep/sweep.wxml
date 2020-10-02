@@ -1,0 +1,9 @@
+<view class="page-section page-section-spacing swiper">
+    <swiper indicator-dots="true" autoplay="true" interval="2000" duration="500" circular="true">
+        <block wx:for="{{imgList}}">
+            <swiper-item>
+                <image src="{{item[url]}}" style=""/>
+            </swiper-item>
+        </block>
+    </swiper>
+</view>

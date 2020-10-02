@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, target-densitydpi=device-dpi">
+    <!-- <meta http-equiv="Refresh" content="1" /> -->
+    <link rel="stylesheet" href="./stylesheets/bootstrap.css">
+    <script src="./javascripts/jquery.js"></script>
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            user-select: none;
+
+            overflow: hidden;
+            /*超出的文本隐藏*/
+            text-overflow: ellipsis;
+            /*溢出用省略号显示*/
+            white-space: nowrap;
+            /*溢出不换行*/
+        }
+
+        .insert {
+            float: right;
+            width: 50px;
+            height: 30px;
+            line-height: 30px;
+            text-align: center;
+            border: 1px solid pink;
+        }
+
+        table tr {
+            text-align: center;
+        }
+
+        #tbody>tr>td {
+            height: 50px;
+            /* padding-top:20px; */
+            line-height: 50px;
+        }
+
+        tr>td>span {
+            display: inline-block;
+            border: 1px solid pink;
+            width: 40%;
+            height: 25px;
+        }
+
+        .tou {
+            width: 80%;
+            /* height: 50px;*/
+            display: flex;
+            justify-content: space-evenly;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="tou">
+        <div><input type="text" name="" id=""><button class="sou">搜索</button></div>
+        <div class="insert">添加</div>
+    </div>
+
+
+    <div class="table-responsive">
+        <table class="table table-striped table-bordered table-condensed">
+            <thead>
+                <tr>
+                    <th>项目id</th>
+                    <th>计划名称</th>
+                    <th>提交人</th>
+                    <th>计划执行人</th>
+                    <th>提交时间</th>
+                    <th>到厂时间</th>
+                    <th>材料</th>
+                    <th>使用位置</th>
+                    <th>使用量</th>
+                    <th>参考价格</th>
+                    <th>是否超额</th>
+                    <th>小计</th>
+                    <th class="col-lg-1">供应商确认状态</th>
+                    <th class="col-lg-1">操作</th>
+                </tr>
+            </thead>
+            <tbody id="tbody">
+
+            </tbody>
+        </table>
+    </div>
+    <script>
+
+        cha()
+        /*点击添加按钮,添加数据*/
+        $(".insert").click(() => {
+            location.href = "http://localhost:3000/tianjia.html" || "./tianjia.html"
+        })
+
+        /**查单个*/
+        $(".sou").click(function () {
+            let a = $(this).prev().val();
+            if (a === "") {
+                cha()
+            } else {
+                $.ajax({
+                    url: "http://localhost:3000/page/cha",
+                    data: {
+                        mrName: a
+                    },
+                    success: (res) => {
+                        if (res.code === 1) {
+                            alert("数据库没此数据")
+                        } else {
+                            $("tbody").html(
+                                `
+                            <tr>
+                                <td>${res[0].id}</td>
+                                <td>${res[0].mrName}</td>
+                                <td>${res[0].cmtMan}</td>
+                                <td>${res[0].execMan}</td>
+                                <td>${res[0].cmtDate}</td>
+                                <td>${res[0].comeDate}</td>
+                                <td>${res[0].mmid}</td>
+                                <td>${res[0].useloc}</td>
+                                <td>${res[0].nnum}</td>
+                                <td>${res[0].mprice}</td>
+                                <td>${res[0].ifover}</td>
+                                <td>${res[0].msum}</td>
+                                <td>${res[0].provState}</td>
+                                <td>
+                                    <button type="button" class="btn btn-primary xiugai">修改</button>
+                                    <button type="button" class="btn btn-danger shan">删除</button></td>
+                                </tr>
+                            `
+                            )
+                        }
+                    }
+
+                })
+            }
+        })
+
+        /*查全部*/
+        function cha() {
+            $.ajax({
+                url: "http://localhost:3000/page/select",
+                type: "get",
+                dataType: "json",
+                success: (res) => {
+                    if (res.code === -1) {
+                        $("tbody").html(res.msg)
+                    } else {
+                        let a = 1;
+                        let b = "";
+                        res.forEach(item => {
+                            b += `
+                            <tr>
+                                <td>${a++}</td>
+                                <td>${item.mrName}</td>
+                                <td>${item.cmtMan}</td>
+                                <td>${item.execMan}</td>
+                                <td>${item.cmtDate}</td>
+                                <td>${item.comeDate}</td>
+                                <td>${item.mmid}</td>
+                                <td>${item.useloc}</td>
+                                <td>${item.nnum}</td>
+                                <td>${item.mprice}</td>
+                                <td>${item.ifover}</td>
+                                <td>${item.msum}</td>
+                                <td>${item.provState}</td>
+                                <td>
+                                    <button type="button" class="btn btn-primary xiugai">修改</button>
+                                    <button type="button" class="btn btn-danger shan">删除</button></td>
+                                </tr>
+                            `
+                        })
+                        $("tbody").html(b)
+                    }
+                }
+            })
+        }
+        /*
+                    id          项目id
+                    mrName      计划名称
+                    cmtMan      提交人
+                    execMan     计划执行人
+                    cmtDate     提交时间
+                    comeDate    到厂时间
+                    mmid        材料
+                    useloc      使用位置
+                    nnum        使用量
+                    mprice      参考价格
+                    ifover      是否超额
+                    msum        小计
+                    provState   供应商确认状态(已确认和未确认)
+                */
+        /*改*/
+        $("tbody").on("click", ".xiugai", function () {
+            let a = $(this).parent().parent().children().eq(1).text()
+            location.href = `http://localhost:3000/gai.html?a=${a}` || `./gai.html?a=${a}`
+        })
+
+        /*删
+            调用ajax删除数据库数据,然后重新获取
+        */
+        $("tbody").on("click", ".shan", function () {
+            let a = $(this).parent().parent().children().eq(1).text()
+            $.ajax({
+                url: "http://localhost:3000/page/delete",
+                data: {
+                    mrName: a
+                },
+                success: (res) => {
+                    if (res.code === 1) {
+                        alert("删除失败");
+                        return;
+                    } else if (res.code === 0) {
+                        alert("删除成功");
+                        cha()
+                    }
+                }
+            })
+        })
+    </script>
+</body>
+
+</html>

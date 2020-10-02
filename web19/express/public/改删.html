@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, target-densitydpi=device-dpi">
+    <!-- <meta http-equiv="Refresh" content="1" /> -->
+    <title>Document</title>
+    <script src="./javascripts/jquery.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            user-select: none;
+        }
+
+        form {
+            width: 300px;
+            margin: 50px auto;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- <form action="//localhost:3000/page/age" method="get">
+        <input type="submit">
+    </form> -->
+    <form action="">
+        id: <input type="text" name="" id="id" disabled>
+        <br>
+        用户名:<input type="text" name="" id="username">
+        <br>
+        密 码 ：<input type="text" name="" id="hobby">
+        <br>
+        年龄: <input type="text" name="" id="age">
+        <br>
+        <input type="button" name="" id="button" value="修改">
+        <input type="button" name="" id="shan" value="删除">
+    </form>
+
+
+    <script>
+        let aa = JSON.parse(localStorage.getItem("userinfo"));
+        if (!aa) {
+            alert("未登录,请先登录")
+            location.href = "./denglu.html"
+        }
+        /*查询*/
+        $.ajax({
+            url: "http://localhost:3000/page/cha",
+            data: { id: aa.id },
+            success: (res) => {
+                if (res.code === 1) {
+                    alert("查询失败");
+                    $("html").html("暂无数据");
+                    location.href = "./denglu.html"
+                } else {
+                    $("#id").val(res[0].id)
+                    $("#username").val(res[0].username)
+                    $("#hobby").val(res[0].hobby)
+                    $("#age").val(res[0].age)
+                    // console.log(res[0]);
+                }
+            }
+        })
+        /*修改*/
+        $("#button").on("click", () => {
+            let id = $("#id").val();
+            let username = $("#username").val();
+            let hobby = $("#hobby").val();
+            let age = $("#age").val();
+            $.ajax({
+                url: "http://localhost:3000/page/gai",
+                dataType: "json",
+                type: "get",
+                data: {
+                    id: id,
+                    username: username,
+                    age: age,
+                    hobby: hobby,
+                },
+                success: (res) => {
+                    if (res.code === -1) {
+                        alert("用户名,年龄,密码不能为空");
+                    } else if (res.code === 1) {
+                        alert("修改失败");
+                    } else if (res.code === 0) {
+                        alert("修改成功")
+                    }
+                }
+            })
+        })
+
+        /**删除*/
+        $("#shan").on("click", () => {
+            let id = $("#id").val();
+            let username = $("#username").val();
+            let hobby = $("#hobby").val();
+            let age = $("#age").val();
+            $.ajax({
+                url: "http://localhost:3000/page/shan",
+                dataType: "json",
+                type: "get",
+                data: {
+                    id: id,
+                    username: username,
+                    age: age,
+                    hobby: hobby,
+                },
+                success: (res) => {
+                    if (res.code === -1) {
+                        alert("用户名,年龄,密码不能为空");
+                    } else if (res.code === 1) {
+                        alert("查询失败");
+                    } else if (res.code === 2) {
+                        alert("删除失败");
+                    } else if (res.code === 0) {
+                        alert("删除成功")
+                    }
+                }
+            })
+
+        })
+
+    </script>
+</body>
+
+</html>

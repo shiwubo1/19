@@ -61,37 +61,19 @@
 //     console.log(a);
 //     a = arr.flat(2)
 //     console.log(a);
-    /**filter(function(每一项值,每一项下标,当前数组){})  过滤 */
-    let ccc = [23,15,1,1,23,512,1];
-    // ccc.filter(function(item,index,a){
-    //     console.log(item);
-    //     console.log(index);
-    //     console.log(a);
-    // })
-    /**数组去重 */
-    let a = ccc.filter(function(item,index,a){
-        return ccc.indexOf(item)===index
-    })
-    console.log(a);
+/**filter(function(每一项值,每一项下标,当前数组){})  过滤 */
+let ccc = [23, 15, 1, 1, 23, 512, 1];
+// ccc.filter(function(item,index,a){
+//     console.log(item);
+//     console.log(index);
+//     console.log(a);
+// })
+/**数组去重 */
+let a = ccc.filter(function (item, index, a) {
+    return ccc.indexOf(item) === index
+})
+console.log(a);
 // }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 // {
 //     /*map()数据映射*/
@@ -114,6 +96,7 @@
 //     })
 // }
 // {
+//     reduce()计数
 //     let str = "12312145123"
 //     // reduce(function(返回值,当前值,index,Array/Object){},[]/{})
 //     let result = str.split("").reduce(function (acc, cur) {
@@ -235,3 +218,4 @@
 //         console.log(item,index);
 //     })
 // }
+

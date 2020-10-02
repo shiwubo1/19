@@ -77,7 +77,6 @@ var a = ccc.filter(function (item, index, a) {
 console.log(a);
 // }
 
-
 // {
 //     /*map()数据映射*/
 //     let json = [
@@ -99,6 +98,7 @@ console.log(a);
 //     })
 // }
 // {
+//     reduce()计数
 //     let str = "12312145123"
 //     // reduce(function(返回值,当前值,index,Array/Object){},[]/{})
 //     let result = str.split("").reduce(function (acc, cur) {

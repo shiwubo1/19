@@ -1,0 +1,16 @@
+.aa>button {
+  width        : 80%;
+  margin-top   : 30rpx;
+  margin-bottom: 30rpx;
+}
+
+.bb {
+  margin: 0 auto;
+  width          : 80%;
+  display        : flex;
+  justify-content: space-around;
+}
+
+.mini-btn {
+  margin-right: 10rpx;
+}

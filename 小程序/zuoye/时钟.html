@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, target-densitydpi=device-dpi">
+    <!-- <meta http-equiv="Refresh" content="1" /> -->
+    <link rel="stylesheet" href="./css/时钟.css">
+    <title>Document</title>
+    <style>
+       
+        </style>
+</head>
+
+<body>
+<div class="yuan">
+    <div class="shu1"></div>
+    <div class="shu2"></div>
+    <div class="shu3"></div>
+    <div class="shu4"></div>
+    <div class="shu5"></div>
+    <span class="shi"></span>
+    <span class="fen"></span>
+    <span class="miao"></span>
+</div>
+
+
+    <script>
+        {
+            let shi = document.querySelector(".shi")
+            let fen = document.querySelector(".fen")
+            let miao = document.querySelector(".miao")
+            setInterval(()=>{
+                let date = new Date()
+                let hour = date.getHours();
+                hour = hour>12?hour-12:hour
+                let minutes = date.getMinutes();            
+                let seconds = date.getSeconds();
+                shi.style.transform=`rotate(${hour*(360/12)}deg)`
+                fen.style.transform=`rotate(${minutes*(360/60)}deg)`
+                miao.style.transform=`rotate(${seconds*(360/60)}deg)`
+            },1000)
+        }
+    </script>
+</body>
+
+</html>

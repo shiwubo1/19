@@ -1,0 +1,92 @@
+<!--logs.wxml-->
+
+<!-- <view class="page-section page-section-spacing swiper">
+  <swiper indicator-dots="true" autoplay="true" interval="3000" circular="true" duration="500">
+    <block wx:for="{{background}}" wx:key="*this">
+      <swiper-item>
+        <image src="{{item.img}}" />
+      </swiper-item>
+    </block>
+  </swiper>
+</view> -->
+<sweepImg imgList="{{background}}" url="img"></sweepImg>
+
+<view class="aa">
+  <button type="primary">页面主操作 Normal</button>
+  <button type="primary" loading="true">页面主操作 Loading</button>
+  <button type="primary" disabled="true">页面主操作 Disabled</button>
+
+  <button type="default">页面次要操作 Normal</button>
+  <button type="default" disabled="true">页面次要操作 Disabled</button>
+
+  <button type="warn">警告类操作 Normal</button>
+  <button type="warn" disabled="true">警告类操作 Disabled</button>
+
+  <button type="primary" plain="true">按钮</button>
+  <button type="primary" disabled="true" plain="true">不可点击的按钮</button>
+
+  <button type="default" plain="true">按钮</button>
+  <button type="default" disabled="true" plain="true">按钮</button>
+</view>
+<view class="bb">
+  <button class="mini-btn" type="primary" size="mini">按钮</button>
+  <button class="mini-btn" type="default" size="mini">按钮</button>
+  <button class="mini-btn" type="warn" size="mini">按钮</button>
+</view>
+<view>
+  ————————————————————————————————————
+</view>
+<view>
+  <label class="checkbox">
+    <checkbox value="cb" checked="true"/>
+选中
+  </label>
+  <label class="checkbox">
+    <checkbox value="cb" />
+未选中
+  </label>
+</view>
+<view>
+  ————————————————————————————————————
+</view>
+<view>
+  <label wx:for="{{check}}" class="checkbox">
+    <view class="weui-cell__bd">
+      <checkbox checked="{{item.a}}" color=""></checkbox>
+    {{item.value}}        
+    </view>
+  </label>
+</view>
+<view>
+  ————————————————————————————————————
+</view>
+<input class="weui-input" auto-focus placeholder="将会获取焦点"/>
+<view>
+  ——————跳转页面————————
+</view>
+<!-- 
+navigate  导航到页面;       有回退按钮,
+switchTab  导航到导航
+redirect   跳转到非导航 页面  关闭其他非导航页面 无回退按钮
+reLaunch  跳转到某一页面 关闭所有页面 
+ -->
+<navigator url="../xiangqing/xiangqing" open-type="navigate">跳转到新页面</navigator>  
+<navigator url="../shop/shop" open-type="switchTab">跳转到新页面</navigator>  
+<navigator url="../xiangqing/xiangqing" open-type="redirect">跳转到新页面</navigator>  
+
+<navigator url="../xiangqing/xiangqing" open-type="reLaunch">跳转到新页面</navigator>  
+
+<view>
+  ————————画布————————
+</view>
+  <canvas canvas-id="canvas" style="width:640rpx height:400rpx "></canvas>
+<view>
+  ————————地图————————
+</view>
+<map id="map" longitude="{{longitude}}" latitude="{{latitude}}" scale="14" markers="{{markers}}" show-location style="width: 100%; height: 300px;"></map>
+    
+  
+  
+  
+  
+    

@@ -1,0 +1,54 @@
+/* pages/xiangqing/xiangqing.wxss */
+.inp {
+    width          : 80%;
+    height         : 80rpx;
+    display        : flex;
+    justify-content: space-around;
+    margin         : 40rpx auto;
+}
+
+.inp>input {
+    width        : 70%;
+    height       : 100%;
+    border       : 1rpx solid red;
+    border-radius: 5rpx;
+}
+
+.inp>button {
+    border-radius: 5rpx;
+}
+
+.info {
+    width          : 100%;
+    display        : flex;
+    justify-content: space-evenly;
+    flex-wrap      : wrap;
+}
+
+.box {
+    width           : 300rpx;
+    height          : 450rpx;
+    margin          : 40rpx 0;
+    border: 1rpx solid red;
+}
+
+.infoname {
+    height    : 80rpx;
+    text-align: center;
+    font-size : 40rpx;
+    line-height: 80rpx;
+}
+
+.box>image {
+    width : 300rpx;
+    height: 300rpx;
+}
+
+.di {
+    height    : 70rpx;
+    text-align: center;
+    line-height: 70rpx;
+    font-size : 30rpx;
+    display: flex;
+    justify-content: space-between;
+}

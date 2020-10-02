@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, target-densitydpi=device-dpi">
+    <!-- <meta http-equiv="Refresh" content="1" /> -->
+    <link rel="stylesheet" href="./stylesheets/bootstrap.css">
+    <script src="./javascripts/jquery.js"></script>
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            user-select: none;
+        }
+
+        form {
+            width: 500px;
+            height: 500px;
+            margin: 50px auto;
+        }
+
+        p {
+            height: 50px;
+            line-height: 20px;
+
+        }
+
+        p>input {
+            width: 300px;
+            height: 40px;
+            outline: none;
+        }
+
+        p>label {
+            width: 100px;
+        }
+
+        #button {
+            width: 50px;
+            height: 30px;
+        }
+    </style>
+</head>
+
+<body>
+    <form action="" autocomplete="off">
+        <p>
+            <label for="">用户名:</label>
+            <input type="text" name="" id="username">
+        </p>
+        <p>
+            <label for="">手机号:</label>
+            <input type="text" name="" id="tel">
+        </p>
+        <p>
+            <label for="">邮箱:</label>
+            <input type="text" name="" id="mail">
+        </p>
+        <p>
+            <label for="">密码:</label>
+            <input type="text" name="" id="password">
+        </p>
+        <p>
+            <label for="">确认密码:</label>
+            <input type="text" name="" id="repassword">
+        </p>
+        <input type="checkbox" name="" id="check" style="margin-right: 20px;"><label for="check">同意保密协议</label>
+        <br>
+        <input type="button" name="" id="button" value="注册">
+    </form>
+
+
+    <script>
+        $("form").on("click", "#button", () => {
+            let username = $("#username").val();
+            let tel = $("#tel").val();
+            let password = $("#password").val();
+            let repassword = $("#repassword").val();
+            let mail = $("#mail").val();
+            let mailreg = /^[A-Za-z0-9\u4e00-\u9fa5]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/;
+            let telreg = /^(13[0-9]|14[5|7]|15[0|1|2|3|5|6|7|8|9]|18[0|1|2|3|5|6|7|8|9])\d{8}$/;
+            let passwordreg = /^[a-zA-Z]\w{5,17}$/;
+
+            if (!username) {
+                alert("用户名不能为空");
+                return;
+            }
+            if (!tel) {
+                alert("电话不能为空");
+                return;
+            }
+            if (!reg(tel, telreg)) {
+                alert("手机号格式错误,格式*********@(163/qq).com")
+                return;
+            }
+            if (!mail) {
+                alert("邮箱不能为空");
+                return;
+            }
+            if (!reg(mail, mailreg)) {
+                alert("邮箱格式错误,格式*********@(163/qq).com")
+                return;
+            }
+            if (!password) {
+                alert("密码不能为空");
+                return;
+            }
+            if (!reg(password, passwordreg)) {
+                alert("密码格式错误,英文字母开头的6-18位")
+                return;
+            }
+            if (!repassword) {
+                alert("确认密码不能为空");
+                return;
+            }
+            if (password !== repassword) {
+                alert("两次密码输入不一致")
+                return;
+            }
+            if (!$("#check").is(':checked')) {
+                alert("请先同意保密协议");
+                return;
+            }
+            function reg(str, reg) {
+                return reg.test(str)
+            }
+            $.ajax({
+                url:"http://localhost:3000/page/zhuce",
+                type:"get",
+                dataType:"json",
+                data:{
+                    username,
+                    tel,
+                    mail,
+                    password
+                },
+                success:(res)=>{
+                    if(res.code === -1){
+                        alert("用户已注册");
+                    }else if(res.code===1){
+                        alert("注册失败");
+                    }else if(res.code ===0){
+                        alert("注册成功");
+                        location.href = "./denglu.html"||"http://localhost:3000/denglu.html"
+                    }
+                }
+            })
+        })
+    </script>
+</body>
+
+</html>

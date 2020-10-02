@@ -1,0 +1,35 @@
+<!--pages/list/list.wxml-->
+<view>
+    
+</view>
+  
+<view>
+    <view>
+        <view>
+        名字:{{allinfo.title}}
+        </view>
+        <view>
+        类型:{{allinfo.cat_name}}
+        </view>
+        <view>
+        价格·:{{allinfo.reserve_price}}
+        </view>
+        <view>
+        店铺:{{allinfo.nick}}
+        </view>
+        <view>
+        发出地:{{allinfo.provcity}}
+        </view>
+        <view>
+        图片:{{allinfo.pict_url}}
+        </view>
+        <view>
+        小图片:{{allinfo.small_images.string}}
+        </view>
+        <view>
+        累计评价:{{allinfo.volume}}
+        </view>
+    </view>
+
+</view>
+  

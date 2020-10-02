@@ -1,0 +1,97 @@
+<!--pages/shop/shop.wxml-->
+
+<!-- 横向滚动 -->
+<view class="page-spacing">
+    <scroll-view class="scroll-view_H" scroll-x="true" style=" width:100% ">
+        <view class="scroll-item demo-text-1" wx:for="{{shopping}}" bindtap="tapdas" id="{{index}}" data-name="{{item.name}}">
+            <image src="{{item.icon}}" class="img" />
+            <text class="tex" wx:if="{{index===id}}" style="color:red">
+                  {{item.name}}  
+            </text>
+            <text class="tex" wx:else>
+                  {{item.name}}  
+            </text>
+
+</view>
+</scroll-view>
+</view>
+
+
+
+<!-- 引用 -->
+<import src="../template/template.wxml"/>
+            <!-- 数据绑定 -->
+            <view>{{mes}}</view>
+            <!-- 列表渲染 -->
+            <view wx:for="{{list}}">{{index}}{{item.name}}</view>
+            <!-- 条件渲染 -->
+            <view wx:if="{{tiao<10}}">小于10</view>
+            <view wx:elif="{{tiao>10}}">大于10</view>
+            <view wx:else>等于10</view>
+<!-- 使用模板 -->
+<template is="msgItem" data="{{...item}}"></template>
+            <!-- icon -->
+            <icon class="icon-box-img" type="success" size="93"></icon>
+            <icon class="icon-box-img" type="info" size="93"></icon>
+            <icon class="icon-box-img" type="warn" size="93" color="#C9C9C9"></icon>
+            <icon class="icon-box-img" type="warn" size="93"></icon>
+            <icon class="icon-box-img" type="success_no_circle" size="93"></icon>
+
+            <!-- 组件 -->
+
+            <!-- 视图容器  -->
+            <image src="../../image/01.jpg"/>
+            <!-- 可移动区域 -->
+
+            <view class="page-section">
+                <view class="page-section-title first">movable-view区域小于movable-area</view>
+                <movable-area>
+                    <movable-view x="{{x}}" y="{{y}}" direction="all">text</movable-view>
+                </movable-area>
+            </view>
+            <view class="btn-area">
+                <button bindtap="tap" type="primary">点击移动到30*30</button>
+            </view>
+
+            <!-- 纵向滚动 -->
+            <view class="page-section-spacing">
+                <scroll-view scroll-y="true" style="height: 400rpx; width:640rpx ">
+                    <view id="demo1" class="scroll-view-item demo-text-1">
+                        <image src="../../image/img1.jpg" />
+                    </view>
+                    <view id="demo2" class="scroll-view-item demo-text-2">
+                        <image src="../../image/img2.jpg" />
+                    </view>
+                    <view id="demo3" class="scroll-view-item demo-text-3">
+                        <image src="../../image/img3.jpg" />
+                    </view>
+                </scroll-view>
+            </view>
+            <!-- 横向滚动 -->
+            <view class="page-section-spacing">
+                <scroll-view class="scroll-view_H" scroll-x="true" bindscroll="scroll" style="width: 640rpx height:400rpx margin:0 auto">
+                    <view id="demo1" class="scroll-view-item_H demo-text-1">
+                        <image src="../../image/img1.jpg" />
+                    </view>
+                    <view id="demo2" class="scroll-view-item_H demo-text-2">
+                        <image src="../../image/img2.jpg" />
+                    </view>
+                    <view id="demo3" class="scroll-view-item_H demo-text-3">
+                        <image src="../../image/img3.jpg" />
+                    </view>
+                </scroll-view>
+            </view>
+            <view class="page-section page-section-spacing swiper">
+                <swiper indicator-dots="true" autoplay="true" interval="2000" duration="500" circular="true">
+                    <block wx:for="{{background}}">
+                        <swiper-item>
+                            <image src="{{item}}" style=""/>
+                        </swiper-item>
+                    </block>
+                </swiper>
+            </view>
+            <view>
+    ——————————————————————————
+            </view>
+
+

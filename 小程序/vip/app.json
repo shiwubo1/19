@@ -1,0 +1,52 @@
+{
+  "pages": [
+    "pages/geren/geren",
+    "pages/logs/logs",
+    "pages/gouwuche/gouwuche",
+    "pages/index/index"
+  ],
+  "entryPagePath": "pages/geren/geren",
+  "window": {
+    "navigationBarBackgroundColor": "#f99",
+    "navigationBarTextStyle": "white",
+    "navigationBarTitleText": "VIP",
+    "backgroundTextStyle": "dark",
+    "enablePullDownRefresh": true,
+    "backgroundColor": "#f99"
+  },
+  "tabBar": {
+    "color": "",
+    "backgroundColor": "#fff",
+    "selectedColor": "#f00",
+    "position": "bottom",
+    "borderStyle": "black",
+    "list": [
+      {
+        "pagePath": "pages/geren/geren",
+        "text": "首页",
+        "iconPath": "./image/shouye.png",
+        "selectedIconPath": "./image/shouye_active.png"
+      },
+      {
+        "pagePath": "pages/logs/logs",
+        "text": "分类",
+        "iconPath": "./image/fenlei.png",
+        "selectedIconPath": "./image/fenlei_active.png"
+      },
+      {
+        "pagePath": "pages/gouwuche/gouwuche",
+        "text": "购物车",
+        "iconPath": "./image/gwc.png",
+        "selectedIconPath": "./image/gwc_active.png"
+      },
+      {
+        "pagePath": "pages/index/index",
+        "text": "个人中心",
+        "iconPath": "./image/geren.png",
+        "selectedIconPath": "./image/geren_active.png"
+      }
+    ]
+  },
+  "style": "v2",
+  "sitemapLocation": "sitemap.json"
+}

@@ -1,0 +1,74 @@
+/* pages/shop/shop.wxss */
+movable-area {
+    height          : 500rpx;
+    width           : 500rpx;
+    margin          : 0 auto;
+    background-color: red;
+}
+
+movable-view {
+    width           : 80rpx;
+    height          : 80rpx;
+    background-color: green;
+}
+
+button {
+    width           : 500rpx;
+    height          : 100rpx;
+    background-color: green;
+    margin          : 0 auto;
+}
+
+.page-section-spacing {
+    width : 640rpx;
+    height: 400rpx;
+    margin: 60rpx auto;
+
+}
+
+.scroll-view_H {
+    white-space: nowrap;
+}
+
+.scroll-view-item {
+    width : 640rpx;
+    height: 400rpx;
+}
+
+
+.scroll-view-item_H {
+    display: inline-block;
+    width  : 640rpx;
+    height : 400rpx;
+}
+image {
+    width : 640rpx;
+    height: 400rpx;
+}
+
+
+
+.page-spacing {
+    width : 100%;
+    height: 200rpx;
+    margin: 60rpx auto;
+
+}
+.scroll-item {
+    display: inline-block;
+    width : 200rpx;
+    height: 270rpx;
+    text-align: center;
+
+}
+.img{
+    width: 200rpx;
+    height: 200rpx;
+}
+.tex{
+    width: 100%;
+    height: 70rpx;
+    /* text-align: center; */
+}
+
+
